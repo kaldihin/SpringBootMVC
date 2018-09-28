@@ -77,11 +77,12 @@ public class Organization {
 
     }
 
-    public Organization(Integer oId, String name, String fullName, Integer inn,
+    public Organization(Integer oId, String name, String fullName, Integer inn, Integer version,
                         Integer kpp, String address, String phone, Boolean isActive) {
         this.oId = oId;
         this.name = name;
         this.fullName = fullName;
+        this.version = version;
         this.inn = inn;
         this.kpp = kpp;
         this.address = address;
@@ -94,7 +95,7 @@ public class Organization {
     @OneToMany(mappedBy = "orgId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Office> offices;
 
-    private Set<Office> getOffices() {
+    public Set<Office> getOffices() {
         return this.offices;
     }
 

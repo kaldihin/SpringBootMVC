@@ -26,7 +26,7 @@ public class OrganizationDaoImpl implements OrganizationDao {
      * {@inheritDoc}
      */
     @Override
-    public List<Organization> list(String name, Integer inn, Boolean isActive) {
+    public List<Organization> list() {
         TypedQuery<Organization> query = em.createQuery("SELECT p FROM Organization p", Organization.class);
         return query.getResultList();
     }

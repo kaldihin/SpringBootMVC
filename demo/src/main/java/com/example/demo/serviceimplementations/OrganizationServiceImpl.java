@@ -49,7 +49,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional(readOnly = true)
     public List<OrganizationViewList> list(OrganizationViewList viewList) {
-        List<Organization> all = dao.list(viewList.getName(), viewList.getInn(), viewList.getIsActive());
+        List<Organization> all = dao.list();
 
         return all.stream()
                 .map(mapOrganization())

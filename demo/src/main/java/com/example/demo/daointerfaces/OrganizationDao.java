@@ -13,7 +13,7 @@ public interface OrganizationDao {
      *
      * @return List
      */
-    List<Organization> list(String name, Integer inn, Boolean isActive);
+    List<Organization> list();
 
     /**
      * Получить Organization по ID
