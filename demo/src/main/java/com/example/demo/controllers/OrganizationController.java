@@ -14,6 +14,7 @@ import com.example.demo.views.OrganizationViewUpdate;
 
 import javax.validation.Valid;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -31,20 +32,12 @@ public class OrganizationController {
 
     //  list post
 
-    @ApiOperation(value = "list", nickname = "list", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/organization/list")
-    public Map<String, Object> list(@Valid @RequestBody OrganizationViewList viewList, BindingResult result ) {
-        Map<String, Object> map = new HashMap<>();
-        if (result.hasErrors()) {
-            map.put("result","false");
-        }else{
-            map.put("Data",organizationService.list(viewList));
-        }
-        return map;
+    @ApiOperation(value = "list", nickname = "list", httpMethod = "GET")
+    @GetMapping("/organization/list")
+    public List<OrganizationViewList> list(@Valid @RequestBody OrganizationViewList viewList, BindingResult result ) {
+        if (!result.hasErrors()) {
+            return organizationService.list(viewList);
+        }else return null;
     }
 
     //  organization{id} get
@@ -82,14 +75,16 @@ public class OrganizationController {
 
     @ApiOperation(value = "save", nickname = "save", httpMethod = "POST")
     @PostMapping("/organization/save")
-    public Map<String, Object> save (@Valid @RequestBody OrganizationViewSave viewSave, BindingResult result) {
-        Map<String, Object> map = new HashMap<>();
-        if (result.hasErrors()) {
-            map.put("result","false");
-        }else{
-            organizationService.save(viewSave);
-            map.put("result","success");
-        }
-        return map;
+    public String save (@Valid @RequestBody OrganizationViewSave viewSave, BindingResult result) {
+        String s;
+        organizationService.save(viewSave);
+        s = "success";
+//        if (!result.hasErrors()) {
+//
+//
+//        }else {
+//            s = "failure";
+//        }
+        return s;
     }
 }

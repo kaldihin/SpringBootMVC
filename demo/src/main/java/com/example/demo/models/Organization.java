@@ -8,7 +8,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "organization")
-@NamedQuery(name = "Organization.getAll", query = "SELECT c from Organization c")
 public class Organization {
 
     @Id

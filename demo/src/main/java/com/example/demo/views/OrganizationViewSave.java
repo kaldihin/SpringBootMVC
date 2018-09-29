@@ -17,6 +17,17 @@ public class OrganizationViewSave {
     @NotNull(message = "fullName обязательный параметр")
     private String fullName;
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    @NotNull(message = "version обязательный параметр")
+    private Integer version;
+
     @NotNull(message = "inn обязательный параметр")
     private Integer inn;
 
