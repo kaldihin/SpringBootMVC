@@ -14,5 +14,5 @@ public interface CountryService {
      *
      * @return Countries
      */
-    List<CountryView> countries(CountryView countryView);
+    List<CountryView> countries();
 }

@@ -59,7 +59,7 @@ public class OrganizationTest {
 
         OrganizationViewList orgDelete = new OrganizationViewList();
         orgDelete.setName(org.getName());
-        organizationService.list(orgDelete).forEach(filter -> orgId.add(filter.getId()));
+        organizationService.list().forEach(filter -> orgId.add(filter.getId()));
     }
 
     @Test

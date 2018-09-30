@@ -12,6 +12,16 @@ public class OrganizationView {
 
     private String fullName;
 
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    private Integer version;
+
     private Integer inn;
 
     private Integer kpp;
@@ -28,6 +38,7 @@ public class OrganizationView {
         this.id = organization.getoId();
         this.name = organization.getName();
         this.fullName = organization.getFullName();
+        this.version = organization.getVersion();
         this.inn = organization.getInn();
         this.kpp = organization.getKpp();
         this.address = organization.getAddress();

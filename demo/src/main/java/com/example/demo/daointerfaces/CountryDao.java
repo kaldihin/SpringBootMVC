@@ -14,6 +14,6 @@ public interface CountryDao {
      *
      * @return List
      */
-    List<Country> countries(Country country);
+    List<Country> countries();
 
 }

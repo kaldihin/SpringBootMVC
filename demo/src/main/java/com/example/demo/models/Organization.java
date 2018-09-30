@@ -11,7 +11,7 @@ import java.util.Set;
 public class Organization {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "organization_id", updatable = false)
     private Integer oId;
 

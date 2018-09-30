@@ -29,19 +29,10 @@ public class CountryController {
         this.countryService = countryService;
     }
 
-    @ApiOperation(value = "countries", nickname = "countries", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/getCountries")
-    public Map<String, Object> countries(@Valid @RequestBody CountryView countryView, BindingResult result ) {
+    @PostMapping(value = "/getCountries")
+    public Map<String, Object> countries() {
         Map<String, Object> map = new HashMap<>();
-        if (result.hasErrors()) {
-            map.put("result","false");
-        }else{
-            map.put("Data",countryService.countries(countryView));
-        }
+            map.put("data",countryService.countries());
         return map;
     }
 

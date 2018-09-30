@@ -48,7 +48,7 @@ public class OrganizationServiceImpl implements OrganizationService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<OrganizationViewList> list(OrganizationViewList viewList) {
+    public List<OrganizationViewList> list() {
         List<Organization> all = dao.list();
 
         return all.stream()

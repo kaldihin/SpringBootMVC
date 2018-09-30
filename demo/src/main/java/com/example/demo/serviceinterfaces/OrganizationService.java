@@ -31,7 +31,7 @@ public interface OrganizationService {
      *
      * @return OrganizationViewList
      */
-    List<OrganizationViewList> list(OrganizationViewList viewList);
+    List<OrganizationViewList> list();
 
     /**
      * Получить организацию по ID

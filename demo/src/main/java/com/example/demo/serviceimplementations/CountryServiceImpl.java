@@ -33,8 +33,8 @@ public class CountryServiceImpl implements CountryService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<CountryView> countries(CountryView view) {
-        List<Country> all = dao.countries(new Country(view.getName(), view.getCode()));
+    public List<CountryView> countries() {
+        List<Country> all = dao.countries();
 
         return all.stream()
                 .map(mapOffice())
