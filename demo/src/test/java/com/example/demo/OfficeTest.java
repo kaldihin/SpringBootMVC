@@ -12,7 +12,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
-import com.example.demo.DemoApplication;
 import com.example.demo.serviceinterfaces.OfficeService;
 import com.example.demo.views.OfficeView;
 import com.example.demo.views.OfficeViewSave;
@@ -25,7 +24,7 @@ import java.util.Map;
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {DemoApplication.class})
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {Application.class})
 @DirtiesContext
 public class OfficeTest {
 

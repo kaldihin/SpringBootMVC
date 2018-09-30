@@ -22,7 +22,26 @@ CREATE TABLE IF NOT EXISTS office (
     office_name        VARCHAR(50) ,
     office_address     VARCHAR(70) ,
     office_phone       VARCHAR(20) ,
-    office_is_active   BOOLEAN
+    office_is_active   BOOLEAN,
+    FOREIGN KEY (office_org_id) REFERENCES organization (organization_id)
+);
+
+/* Table of Doc */
+
+CREATE TABLE IF NOT EXISTS doc (
+--     doc_id          INTEGER PRIMARY KEY AUTO_INCREMENT,
+    doc_name        VARCHAR(50) NOT NULL,
+    version         INTEGER NOT NULL,
+    doc_code        INTEGER PRIMARY KEY
+);
+
+/* Table of Countries */
+
+CREATE TABLE IF NOT EXISTS country (
+--     country_id      INTEGER PRIMARY KEY AUTO_INCREMENT,
+    country_name    VARCHAR(50) NOT NULL,
+    version         INTEGER NOT NULL,
+    country_code    INTEGER PRIMARY KEY
 );
 
 /* Table of Users */
@@ -43,46 +62,30 @@ CREATE TABLE IF NOT EXISTS user (
     user_citizenship_name VARCHAR(50) ,
     user_citizenship_code INTEGER ,
     user_phone       VARCHAR(20) ,
-    user_is_identified    BOOLEAN
-);
-
-/* Table of Doc */
-
-CREATE TABLE IF NOT EXISTS doc (
-    doc_name        VARCHAR(50) NOT NULL,
-    version         INTEGER NOT NULL,
-    doc_code        INTEGER  PRIMARY KEY
-);
-
-/* Table of Countries */
-
-CREATE TABLE IF NOT EXISTS country (
-    country_name    VARCHAR(50) NOT NULL,
-    version         INTEGER NOT NULL,
-    country_code    INTEGER  PRIMARY KEY
+    user_is_identified    BOOLEAN,
+    FOREIGN KEY (user_office_id) REFERENCES office (office_id),
+    FOREIGN KEY (user_doc_code) REFERENCES doc (doc_code),
+    FOREIGN KEY (user_citizenship_code) REFERENCES country (country_code)
 );
 
 /* FOREIGN KEY LINKING TABLES & INDEXES */
 
 /* Organization <-> Office */
 
-CREATE INDEX IX_office_organization_Id ON office (office_org_id, version, office_name, office_address, office_phone, office_is_active) ;
-ALTER TABLE office ADD FOREIGN KEY (office_org_id) REFERENCES organization (organization_id);
+CREATE INDEX IX_office_organization_Id ON office (office_org_id, office_name, office_address, office_phone, office_is_active) ;
 
 /* Office <-> User */
 
-CREATE INDEX IX_user_office_Id ON user (user_office_id, version, user_firstname, user_secondname, user_middlename, user_lastname, user_position, user_doc_code, user_doc_name, user_doc_number, user_doc_date, user_citizenship_name, user_citizenship_code, user_phone, user_is_identified) ;
-ALTER TABLE user ADD FOREIGN KEY (user_office_id) REFERENCES office (office_id);
+CREATE INDEX IX_user_office_Id ON user (user_office_id, version, user_firstname, user_secondname, user_middlename, user_lastname,
+user_position, user_doc_code, user_doc_name, user_doc_number, user_doc_date, user_citizenship_name, user_citizenship_code, user_phone, user_is_identified) ;
 
 /* User -> Doc */
 
 CREATE INDEX IX_user_doc ON doc (doc_code);
-ALTER TABLE user ADD FOREIGN KEY (user_doc_code) REFERENCES doc (doc_code);
 
 /* User -> Country */
 
 CREATE INDEX IX_user_country ON country (country_code);
-ALTER TABLE user ADD FOREIGN KEY (user_citizenship_code) REFERENCES country (country_code);
 
 
 -- /* Organization <-> Office */

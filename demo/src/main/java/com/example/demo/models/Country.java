@@ -10,6 +10,11 @@ import java.util.Set;
 @Table(name = "country")
 public class Country {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.)
+//    @Column(name = "country_id")
+//    private Integer countryId;
+
     /**
      * Наименование страны
      */
@@ -35,7 +40,7 @@ public class Country {
      * Код страны
      */
     @Id
-    @Column(name = "country_code")
+    @Column(name = "country_code", unique = true)
     private Integer countryCode;
 
     public Country() {

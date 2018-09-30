@@ -1,15 +1,15 @@
 /* Organization table data */
 
-INSERT INTO organization (organization_id, organization_name, organization_fullname, version, organization_inn, organization_kpp,
-                          organization_address, organization_phone, organization_is_active) VALUES (1, 'Bad Organization', 'Организация имени Ивана Нерусского',
+INSERT INTO organization(organization_name, organization_fullname, version, organization_inn, organization_kpp,
+                          organization_address, organization_phone, organization_is_active) VALUES ('Bad Organization', 'Организация имени Ивана Нерусского',
                                                                                                      0, 564573865, 433475475, 'ул.Цюрупы, 16', '89235445754', TRUE);
 
-INSERT INTO organization (organization_id, organization_name, organization_fullname, version, organization_inn, organization_kpp,
-                          organization_address, organization_phone, organization_is_active) VALUES (2, 'Плохая организация', 'Организация имени Ивана Русского',
+INSERT INTO organization(organization_name, organization_fullname, version, organization_inn, organization_kpp,
+                          organization_address, organization_phone, organization_is_active) VALUES ('Плохая организация', 'Организация имени Ивана Русского',
                                                                                                      0, 164178866, 433475475, 'ул.Ленина, 67', '89235775757', FALSE);
 
-INSERT INTO organization (organization_id, organization_name, organization_fullname, version, organization_inn, organization_kpp,
-                          organization_address, organization_phone, organization_is_active) VALUES (3, 'Новая организация', 'Организация имени Ивана Иванова',
+INSERT INTO organization(organization_name, organization_fullname, version, organization_inn, organization_kpp,
+                          organization_address, organization_phone, organization_is_active) VALUES ('Новая организация', 'Организация имени Ивана Иванова',
                                                                                                      0, 564578865, 433471471, 'ул.Дзержинского, 11', '89435445754', TRUE);
 
 /* Office table data */

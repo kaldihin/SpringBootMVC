@@ -10,6 +10,11 @@ import java.util.Set;
 @Table(name = "doc")
 public class Doc {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.AUTO)
+//    @Column(name = "doc_id")
+//    private Integer docId;
+
     @Column(name = "doc_name", length = 50, nullable = false)
     private String name;
 
@@ -32,7 +37,7 @@ public class Doc {
      * Код документа
      */
     @Id
-    @Column(name = "doc_code")
+    @Column(name = "doc_code", unique = true)
     private Integer code;
 
     public Doc() {

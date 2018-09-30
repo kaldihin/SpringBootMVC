@@ -17,11 +17,12 @@ public class OrganizationViewUpdate {
     @NotNull(message = "fullName обязательный параметр")
     private String fullName;
 
+    @NotNull(message = "version обязательный параметр")
     public Integer getVersion() {
         return version;
     }
 
-    public void setVersion(Integer version) {
+    public void setVersion(@NotNull Integer version) {
         this.version = version;
     }
 
@@ -47,6 +48,7 @@ public class OrganizationViewUpdate {
         this.id = organization.getoId();
         this.name = organization.getName();
         this.fullName = organization.getFullName();
+        this.version = organization.getVersion();
         this.inn = organization.getInn();
         this.kpp = organization.getKpp();
         this.address = organization.getAddress();

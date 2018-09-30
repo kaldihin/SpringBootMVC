@@ -34,17 +34,15 @@ public class OrganizationController {
     @ResponseBody
     public Map<String, Object> list() {
         Map<String, Object> map = new HashMap<>();
-        List<OrganizationViewList> list = new LinkedList<>(organizationService.list());
-            for (OrganizationViewList orgv : list) {
-                map.put("data", orgv.toString());
-            }
+        List<OrganizationViewList> list = organizationService.list();
+                map.put("data", list);
             return map;
     }
 
     //  organization{id} get
 
 
-    @GetMapping("/organization/getby{id}")
+    @GetMapping("/organization/{id}")
     public Map<String, Object> organization(@PathVariable("id") Integer id) {
         Map<String, Object> map = new HashMap<>();
         map.put("data", organizationService.getById(id).toString());
@@ -55,12 +53,12 @@ public class OrganizationController {
 
 
     @PostMapping("/organization/update")
-    public Map<String, Object> update (@Valid @RequestBody OrganizationViewUpdate view, BindingResult result) {
+    public Map<String, Object> update (@Valid @RequestBody OrganizationViewUpdate viewUpdate, BindingResult result) {
         Map<String, Object> map = new HashMap<>();
         if (result.hasErrors()) {
-            map.put("result","false");
+            map.put("result","error");
         }else{
-            organizationService.update(view);
+            organizationService.update(viewUpdate);
             map.put("result","success");
         }
         return map;
