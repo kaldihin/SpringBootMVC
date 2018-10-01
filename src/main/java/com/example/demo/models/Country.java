@@ -10,10 +10,10 @@ import java.util.Set;
 @Table(name = "country")
 public class Country {
 
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.)
-//    @Column(name = "country_id")
-//    private Integer countryId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "country_id")
+    private Integer countryId;
 
     /**
      * Наименование страны
@@ -39,8 +39,6 @@ public class Country {
     /**
      * Код страны
      */
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "country_code", unique = true)
     private Integer countryCode;
 
@@ -48,14 +46,13 @@ public class Country {
 
     }
 
-    public Country(String countryName, Integer countryCode) {
+    public Country(String countryName, Integer version, Integer countryCode) {
         this.countryName = countryName;
+        this.version = version;
         this.countryCode = countryCode;
     }
 
-
-
-    @OneToMany(mappedBy = "citizenshipCode", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "citizenshipCode", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users;
 
     public Set<User> getUsers() {
