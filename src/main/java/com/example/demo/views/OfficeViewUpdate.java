@@ -13,6 +13,18 @@ public class OfficeViewUpdate {
 
     private Integer orgId;
 
+    @NotNull
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
+    @NotNull(message = "version обязательный параметр")
+    private Integer version;
+
     @NotNull(message = "name обязательный параметр")
     private String name;
 
@@ -28,6 +40,7 @@ public class OfficeViewUpdate {
     public OfficeViewUpdate(Office office) {
         this.id = office.getOfId();
         this.orgId = office.getOrgId();
+        this.version = office.getVersion();
         this.name = office.getName();
         this.address = office.getAddress();
         this.phone = office.getPhone();

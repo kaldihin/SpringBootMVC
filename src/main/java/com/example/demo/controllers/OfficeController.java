@@ -31,38 +31,25 @@ public class OfficeController {
 
     //  list{orgId} post
 
-    @ApiOperation(value = "list", nickname = "list", httpMethod = "GET")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
-    @PostMapping("/office/list/{orgId}")
-    public Map<String, Object> list(@Valid @PathVariable Integer orgId, @RequestBody OfficeViewList org, BindingResult result) {
-        org.setId(orgId);
+    @GetMapping("/office/list/{orgId}")
+    @ResponseBody
+    public Map<String, Object> list(@PathVariable Integer orgId) {
         Map<String, Object> map = new HashMap<>();
-        if (result.hasErrors()) {
-            map.put("result","false");
-        }else{
-            map.put("Data",officeService.list(org, orgId));
-        }
+            map.put("Data",officeService.list(orgId));
         return map;
     }
 
     //  {id} get
 
-    @ApiOperation(value = "getById", nickname = "getById", httpMethod = "GET")
     @GetMapping("/office/{id}")
+    @ResponseBody
     public OfficeView byId(@PathVariable("id") Integer id) {
         return officeService.getById(id);
     }
 
     //  update post
 
-    @ApiOperation(value = "update", nickname = "update", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
+
     @PostMapping("/office/update")
     public Map<String, Object> update(@Valid @RequestBody OfficeViewUpdate officeViewUpdate, BindingResult result) {
         Map<String, Object> map = new HashMap<>();
@@ -77,11 +64,6 @@ public class OfficeController {
 
     //  save post
 
-    @ApiOperation(value = "save", nickname = "save", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/office/save")
     public Map<String, Object> save(@Valid @RequestBody OfficeViewSave officeViewSave, BindingResult result) {
         Map<String, Object> map = new HashMap<>();

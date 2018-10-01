@@ -14,6 +14,18 @@ public class UserViewList {
     @NotNull(message = "officeId обязательный параметр")
     private Integer officeId;
 
+    @NotNull
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
+    @NotNull(message = "version обязательный параметр")
+    private Integer version;
+
     private String firstName;
 
     private String secondName;
@@ -45,6 +57,7 @@ public class UserViewList {
     public UserViewList(User user) {
         this.id = user.getId();
         this.officeId = user.getOfficeId();
+        this.version = user.getVersion();
         this.firstName = user.getFirstName();
         this.secondName = user.getSecondName();
         this.middleName = user.getMiddleName();

@@ -24,7 +24,7 @@ public interface OfficeService {
      *
      * @return Office
      */
-    List<OfficeViewList> list(OfficeViewList officeViewList, Integer orgId);
+    List<OfficeViewList> list(Integer orgId);
 
     /**
      * Получить список офисов по Идентификатору

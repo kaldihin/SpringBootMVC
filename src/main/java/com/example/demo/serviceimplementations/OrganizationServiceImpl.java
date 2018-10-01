@@ -37,7 +37,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional
     public void save(OrganizationViewSave viewSave) {
-        Organization organization = new Organization(viewSave.getId(), viewSave.getName(),
+        Organization organization = new Organization(viewSave.getName(),
                 viewSave.getFullName(),viewSave.getVersion(), viewSave.getInn(), viewSave.getKpp(), viewSave.getAddress(),
                 viewSave.getPhone(), viewSave.getIsActive());
         dao.save(organization);
@@ -68,13 +68,12 @@ public class OrganizationServiceImpl implements OrganizationService {
 
     @Override
     public OrganizationView getById(Integer id) {
-        Organization organization = dao.getById(id);
-        return new OrganizationView(organization);
+        return new OrganizationView(dao.getById(id));
     }
 
     @Override
     public void update(OrganizationViewUpdate viewUpdate) {
-        dao.update(new Organization(viewUpdate.getId(), viewUpdate.getName(),
+        dao.update(new Organization(viewUpdate.getName(),
                 viewUpdate.getFullName(), viewUpdate.getInn(), viewUpdate.getVersion(), viewUpdate.getKpp(),
                 viewUpdate.getAddress(), viewUpdate.getPhone(), viewUpdate.getIsActive()));
     }

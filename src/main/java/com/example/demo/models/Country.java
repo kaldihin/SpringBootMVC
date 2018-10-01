@@ -40,6 +40,7 @@ public class Country {
      * Код страны
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "country_code", unique = true)
     private Integer countryCode;
 

@@ -3,6 +3,7 @@ package com.example.demo.views;
 import io.swagger.annotations.ApiModelProperty;
 import com.example.demo.models.User;
 
+import javax.validation.constraints.NotNull;
 import java.sql.Date;
 
 public class UserView {
@@ -11,6 +12,18 @@ public class UserView {
     private Integer id;
 
     private Integer officeId;
+
+    @NotNull
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
+    @NotNull(message = "version обязательный параметр")
+    private Integer version;
 
     private String firstName;
 
@@ -43,6 +56,7 @@ public class UserView {
     public UserView(User user) {
         this.id = user.getId();
         this.officeId = user.getOfficeId();
+        this.version = user.getVersion();
         this.firstName = user.getFirstName();
         this.secondName = user.getSecondName();
         this.middleName = user.getMiddleName();

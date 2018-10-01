@@ -13,6 +13,18 @@ public class UserViewSave {
 
     private Integer officeId;
 
+    @NotNull
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
+    @NotNull(message = "version обязательный параметр")
+    private Integer version;
+
     @NotNull(message="firstName обязательный параметр")
     private String firstName;
 
@@ -46,6 +58,7 @@ public class UserViewSave {
     public UserViewSave(User user) {
         this.id = user.getId();
         this.officeId = user.getOfficeId();
+        this.version = user.getVersion();
         this.firstName = user.getFirstName();
         this.secondName = user.getSecondName();
         this.middleName = user.getMiddleName();

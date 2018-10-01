@@ -16,11 +16,6 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
 
     private final EntityManager em;
-    private String queryString = "SELECT (user_id, user_office_id," +
-            "user_firstname, user_secondname, user_middlename," +
-            "user_lastname, user_position, user_doc_code, user_doc_name," +
-            "user_doc_number, user_doc_date, user_citizenship_name," +
-            "user_citizenship_code, user_phone, user_is_identified) FROM User";
 
     @Autowired
     public UserDaoImpl(EntityManager em) {
@@ -32,7 +27,7 @@ public class UserDaoImpl implements UserDao {
      */
     @Override
     public List<User> list() {
-        TypedQuery<User> query = em.createQuery(queryString, User.class);
+        TypedQuery<User> query = em.createQuery("SELECT u FROM User u", User.class);
         return query.getResultList();
     }
 

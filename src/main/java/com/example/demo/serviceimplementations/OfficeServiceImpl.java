@@ -51,10 +51,8 @@ public class OfficeServiceImpl implements OfficeService {
      */
     @Override
     @Transactional(readOnly = true)
-    public List<OfficeViewList> list(OfficeViewList officeViewList, Integer orgId) {
-        Office office = new Office(officeViewList.getId(), officeViewList.getOrgId(), officeViewList.getName(), officeViewList.getAddress(),
-                officeViewList.getPhone(), officeViewList.getIsActive());
-        List<Office> all = dao.list(office, orgId);
+    public List<OfficeViewList> list(Integer orgId) {
+        List<Office> all = dao.list(orgId);
 
         return all.stream()
                 .map(mapOffice())

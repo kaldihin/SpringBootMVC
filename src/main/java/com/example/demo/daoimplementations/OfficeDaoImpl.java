@@ -1,12 +1,16 @@
 package com.example.demo.daoimplementations;
 
+import com.example.demo.models.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.example.demo.daointerfaces.OfficeDao;
 import com.example.demo.models.Office;
 
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,8 +30,9 @@ public class OfficeDaoImpl implements OfficeDao {
      * {@inheritDoc}
      */
     @Override
-    public List<Office> list(Office office, Integer orgId) {
-        TypedQuery<Office> query = em.createQuery("SELECT t FROM Office t", Office.class);
+    public List<Office> list(Integer orgId) {
+        TypedQuery<Office> query = em.createQuery("select c from Office c where c.orgId = :orgId", Office.class);
+        query.setParameter("orgId", orgId);
         return query.getResultList();
     }
 

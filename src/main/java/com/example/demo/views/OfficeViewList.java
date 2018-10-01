@@ -13,6 +13,9 @@ public class OfficeViewList {
     @NotNull(message = "orgId обязательный параметр")
     private Integer orgId;
 
+    @NotNull(message = "version обязательный параметр")
+    private Integer version;
+
     private String name;
 
     private String address;
@@ -26,6 +29,7 @@ public class OfficeViewList {
     public OfficeViewList(Office office) {
         this.id = office.getOfId();
         this.orgId = office.getOrgId();
+        this.version = office.getVersion();
         this.name = office.getName();
         this.address = office.getAddress();
         this.phone = office.getPhone();
@@ -45,6 +49,11 @@ public class OfficeViewList {
     @NotNull
     public Integer getOrgId() {
         return orgId;
+    }
+
+    @NotNull
+    public Integer getVersion() {
+        return version;
     }
 
     public String getName() {
@@ -69,6 +78,10 @@ public class OfficeViewList {
 
     public void setOrgId(@NotNull Integer orgId) {
         this.orgId = orgId;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
     }
 
     public void setName(String name) {

@@ -32,35 +32,27 @@ public class UserController {
 
 //    list get
 
-    @ApiOperation(value = "list", nickname = "list", httpMethod = "GET")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
+
     @GetMapping("/user/list")
-    public List<UserViewList> list() {
-        return userService.list();
+    @ResponseBody
+    public Map<String, Object> list() {
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", userService.list());
+        return map;
     }
 
     //    user/{id} get
 
-    @ApiOperation(value = "user", nickname = "user", httpMethod = "GET")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
+
     @GetMapping("/user/{id}")
+    @ResponseBody
     public UserView user(@PathVariable("id") Integer id) {
         return userService.getUser(id);
     }
 
 //    update post
 
-    @ApiOperation(value = "update", nickname = "update", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
+
     @PostMapping("/user/update")
     public Map<String, Object> update(@Valid @RequestBody UserViewUpdate user, BindingResult result) {
         Map<String, Object> map = new HashMap<>();
@@ -74,11 +66,6 @@ public class UserController {
     }
 //    save post
 
-    @ApiOperation(value = "save", nickname = "save", httpMethod = "POST")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Success", response = String.class),
-            @ApiResponse(code = 404, message = "Not Found"),
-            @ApiResponse(code = 500, message = "Failure")})
     @PostMapping("/user/save")
     public Map<String, Object> save(@Valid @RequestBody UserViewSave user, BindingResult result) {
         Map<String, Object> map = new HashMap<>();

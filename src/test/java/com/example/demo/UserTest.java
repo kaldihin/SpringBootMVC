@@ -45,6 +45,7 @@ public class UserTest {
     public void testSaveUser() throws JSONException { // добавить user
         UserViewSave user = new UserViewSave();
         user.setFirstName("firstName_test");
+        user.setVersion(0);
         user.setPosition("position_test");
 
         String s = restTemplate.postForObject("/user/save", user, String.class);

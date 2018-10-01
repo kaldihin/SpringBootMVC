@@ -13,7 +13,7 @@ public interface OfficeDao {
      *
      * @return List
      */
-    List<Office> list(Office office, Integer orgId);
+    List<Office> list(Integer orgId);
 
     /**
      * Получить Office по ID

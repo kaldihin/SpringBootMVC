@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void save(UserViewSave userViewSave) {
-        User user = new User(userViewSave.getId(), userViewSave.getOfficeId(), userViewSave.getFirstName(), userViewSave.getSecondName(),
+        User user = new User(userViewSave.getId(), userViewSave.getOfficeId(), userViewSave.getVersion(), userViewSave.getFirstName(), userViewSave.getSecondName(),
                 userViewSave.getMiddleName(), userViewSave.getLastName(), userViewSave.getPosition(), userViewSave.getDocCode(), userViewSave.getDocName(),
                 userViewSave.getDocNumber(), userViewSave.getDocDate(), userViewSave.getCitizenshipName(), userViewSave.getCitizenshipCode(),
                 userViewSave.getPhone(), userViewSave.getIsIdentified());
@@ -59,14 +59,7 @@ public class UserServiceImpl implements UserService {
 
     private Function<User, UserViewList> mapUser() {
         return user -> {
-            UserViewList userViewList = new UserViewList();
-            userViewList.setOfficeId(user.getOfficeId());
-            userViewList.setFirstName(user.getFirstName());
-            userViewList.setMiddleName(user.getMiddleName());
-            userViewList.setLastName(user.getLastName());
-            userViewList.setPosition(user.getPosition());
-            userViewList.setDocCode(user.getDocCode());
-            userViewList.setCitizenshipCode(user.getCitizenshipCode());
+            UserViewList userViewList = new UserViewList(user);
 
             log.debug(userViewList.toString());
 
@@ -82,7 +75,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public void update(UserViewUpdate userViewUpdate) {
-        User userUpdate = new User(userViewUpdate.getId(), userViewUpdate.getOfficeId(), userViewUpdate.getFirstName(), userViewUpdate.getSecondName(),
+        User userUpdate = new User(userViewUpdate.getId(), userViewUpdate.getOfficeId(), userViewUpdate.getVersion(), userViewUpdate.getFirstName(), userViewUpdate.getSecondName(),
                 userViewUpdate.getMiddleName(), userViewUpdate.getLastName(), userViewUpdate.getPosition(), userViewUpdate.getDocCode(), userViewUpdate.getDocName(),
                 userViewUpdate.getDocNumber(), userViewUpdate.getDocDate(), userViewUpdate.getCitizenshipName(), userViewUpdate.getCitizenshipCode(),
                 userViewUpdate.getPhone(), userViewUpdate.getIsIdentified());

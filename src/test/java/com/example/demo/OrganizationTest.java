@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -20,6 +21,7 @@ import com.example.demo.views.OrganizationViewSave;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -38,7 +40,20 @@ public class OrganizationTest {
 
     @Before
     public void testBefore() {
+        OrganizationViewSave organizationViewSave = new OrganizationViewSave();
+        organizationViewSave.setName("testName");
+        organizationViewSave.setFullName("TestFullName");
+        organizationViewSave.setVersion(0);
+        organizationViewSave.setInn(123);
+        organizationViewSave.setKpp(123);
+        organizationViewSave.setAddress("TestAddress");
+        organizationViewSave.setPhone("89278763421");
+        organizationViewSave.setIsActive(true);
 
+        organizationService.save(organizationViewSave);
+        idList.add(1);
+
+        System.out.println(organizationService.list());
     }
 
     @Test
@@ -64,9 +79,10 @@ public class OrganizationTest {
 
     @Test
     public void testOrganizationId() { // получить Organization по ид
-//        Integer id = idList.get(0);
-//        OrganizationView orgNew = restTemplate.getForObject("/organization/"+id, OrganizationView.class);
-//        Assert.assertEquals(id, orgNew.getId());
+
+        Integer id = idList.get(0);
+        OrganizationView orgNew = restTemplate.getForObject("/organization/"+id, OrganizationView.class, HashMap.class);
+        Assert.assertEquals(id, orgNew.getId());
     }
 
     @Test
@@ -86,6 +102,12 @@ public class OrganizationTest {
         Assert.assertEquals("success", result);
     }
 
+    @Test
+    public void testListOrganization() throws JSONException {
+        JSONObject s = new JSONObject(restTemplate.getForObject("/organization/list", OrganizationViewList.class, HashMap.class).toString());
+        Assert.assertEquals(3, s.length());
+        System.out.println(s.toString());
+    }
 
 //    @After
 //    public void testAfter() {

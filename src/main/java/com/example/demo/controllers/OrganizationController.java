@@ -35,7 +35,7 @@ public class OrganizationController {
     public Map<String, Object> list() {
         Map<String, Object> map = new HashMap<>();
         List<OrganizationViewList> list = organizationService.list();
-                map.put("data", list);
+        map.put("data", list);
             return map;
     }
 
@@ -65,7 +65,6 @@ public class OrganizationController {
     }
 
     //  save post
-
 
     @PostMapping("/organization/save")
     public Map<String, Object> save (@Valid @RequestBody OrganizationViewSave viewSave, BindingResult result) {

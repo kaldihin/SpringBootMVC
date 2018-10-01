@@ -3,12 +3,26 @@ package com.example.demo.views;
 import io.swagger.annotations.ApiModelProperty;
 import com.example.demo.models.Office;
 
+import javax.validation.constraints.NotNull;
+
 public class OfficeView {
 
     @ApiModelProperty(hidden = true)
     private Integer id;
 
     private Integer orgId;
+
+    @NotNull
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
+    @NotNull(message = "version обязательный параметр")
+    private Integer version;
 
     private String name;
 
@@ -23,6 +37,7 @@ public class OfficeView {
     public OfficeView(Office office) {
         this.id = office.getOfId();
         this.orgId = office.getOrgId();
+        this.version = office.getVersion();
         this.name = office.getName();
         this.address = office.getAddress();
         this.phone = office.getPhone();

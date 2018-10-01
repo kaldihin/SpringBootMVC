@@ -37,6 +37,7 @@ public class Doc {
      * Код документа
      */
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "doc_code", unique = true)
     private Integer code;
 

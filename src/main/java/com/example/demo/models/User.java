@@ -16,7 +16,7 @@ public class User {
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id", updatable = false)
+    @Column(name = "user_id")
     private Integer uId;
 
     /**
@@ -122,13 +122,14 @@ public class User {
 
     }
 
-    public User(Integer uId, Integer officeId, String firstName, String secondName,
+    public User(Integer uId, Integer officeId, Integer version, String firstName, String secondName,
                 String middleName, String lastName, String position, Integer docCode,
                 String docName, Integer docNumber, Date docDate, String citizenshipName,
                 Integer citizenshipCode, String phone, Boolean isIdentified) {
 
         this.uId = uId;
         this.officeId = officeId;
+        this.version = version;
         this.firstName = firstName;
         this.secondName = secondName;
         this.middleName = middleName;
@@ -212,7 +213,7 @@ public class User {
     }
 
     public Integer getDocCode() {
-        return docCode;
+        return docs.getCode();
     }
 
     public String getDocName() {
@@ -232,7 +233,7 @@ public class User {
     }
 
     public Integer getCitizenshipCode() {
-        return citizenshipCode;
+        return countries.getCountryCode();
     }
 
     public String getPhone() {
@@ -271,8 +272,8 @@ public class User {
         this.position = position;
     }
 
-    public void setDocCode(Integer docCode) {
-        this.docCode = docCode;
+    public void setDocCode() {
+        this.docCode = docs.getCode();
     }
 
     public void setDocName(String docName) {
@@ -291,8 +292,8 @@ public class User {
         this.citizenshipName = citizenshipName;
     }
 
-    public void setCitizenshipCode(Integer citizenshipCode) {
-        this.citizenshipCode = citizenshipCode;
+    public void setCitizenshipCode() {
+        this.citizenshipCode = countries.getCountryCode();
     }
 
     public void setPhone(String phone) {

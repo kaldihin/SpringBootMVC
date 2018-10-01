@@ -12,7 +12,7 @@ public class Organization {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "organization_id", updatable = false)
+    @Column(name = "organization_id")
     private Integer oId;
 
     public Integer getVersion() {
@@ -76,9 +76,8 @@ public class Organization {
 
     }
 
-    public Organization(Integer oId, String name, String fullName, Integer inn, Integer version,
+    public Organization(String name, String fullName, Integer inn, Integer version,
                         Integer kpp, String address, String phone, Boolean isActive) {
-        this.oId = oId;
         this.name = name;
         this.fullName = fullName;
         this.version = version;

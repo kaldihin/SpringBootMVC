@@ -15,13 +15,7 @@ public class Office {
     @Column(name = "office_id", updatable = false)
     private Integer ofId;
 
-    public Integer getVersion() {
-        return version;
-    }
 
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     /**
      * Служебное поле hibernate
@@ -94,6 +88,14 @@ public class Office {
 
     public Set<User> getUsers() {
         return this.users;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public Integer getOfId() {
