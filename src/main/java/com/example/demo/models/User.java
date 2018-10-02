@@ -211,7 +211,7 @@ public class User {
     }
 
     public Integer getDocCode() {
-        return docs.getCode();
+        return docCode;
     }
 
     public String getDocName() {
@@ -231,7 +231,7 @@ public class User {
     }
 
     public Integer getCitizenshipCode() {
-        return countries.getCountryCode();
+        return citizenshipCode;
     }
 
     public String getPhone() {
@@ -270,8 +270,8 @@ public class User {
         this.position = position;
     }
 
-    public void setDocCode() {
-        this.docCode = docs.getCode();
+    public void setDocCode(Integer docCode) {
+        this.docCode = docCode;
     }
 
     public void setDocName(String docName) {
@@ -290,8 +290,8 @@ public class User {
         this.citizenshipName = citizenshipName;
     }
 
-    public void setCitizenshipCode() {
-        this.citizenshipCode = countries.getCountryCode();
+    public void setCitizenshipCode(Integer citizenshipCode) {
+        this.citizenshipCode = citizenshipCode;
     }
 
     public void setPhone(String phone) {

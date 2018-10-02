@@ -57,7 +57,7 @@ public class UserController {
     public Map<String, Object> update(@Valid @RequestBody UserViewUpdate user, BindingResult result) {
         Map<String, Object> map = new HashMap<>();
         if (result.hasErrors()) {
-            map.put("result","false");
+            map.put("result","error");
         }else{
             userService.update(user);
             map.put("result","success");
@@ -70,7 +70,7 @@ public class UserController {
     public Map<String, Object> save(@Valid @RequestBody UserViewSave user, BindingResult result) {
         Map<String, Object> map = new HashMap<>();
         if (result.hasErrors()) {
-            map.put("result","false");
+            map.put("result","error");
         }else{
             userService.save(user);
             map.put("result","success");

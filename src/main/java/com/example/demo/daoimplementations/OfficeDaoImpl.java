@@ -30,9 +30,8 @@ public class OfficeDaoImpl implements OfficeDao {
      * {@inheritDoc}
      */
     @Override
-    public List<Office> list(Integer orgId) {
-        TypedQuery<Office> query = em.createQuery("select c from Office c where c.orgId = :orgId", Office.class);
-        query.setParameter("orgId", orgId);
+    public List<Office> list(Integer organizationId) {
+        TypedQuery<Office> query = em.createQuery("from Office where orgId = :organizationId", Office.class).setParameter("organizationId", organizationId);
         return query.getResultList();
     }
 

@@ -37,11 +37,12 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void save(OfficeViewSave officeViewSave) {
-        dao.save(new Office(officeViewSave.getId(), officeViewSave.getOrgId(), officeViewSave.getName(), officeViewSave.getAddress(),
+        dao.save(new Office(officeViewSave.getId(), officeViewSave.getVersion(), officeViewSave.getOrgId(), officeViewSave.getName(), officeViewSave.getAddress(),
                 officeViewSave.getPhone(), officeViewSave.getIsActive()));
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
         dao.delete(id);
     }
@@ -84,7 +85,7 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void update(OfficeViewUpdate officeViewUpdate) {
-        dao.update(new Office(officeViewUpdate.getId(), officeViewUpdate.getOrgId(), officeViewUpdate.getName(), officeViewUpdate.getAddress(),
+        dao.update(new Office(officeViewUpdate.getId(), officeViewUpdate.getVersion(), officeViewUpdate.getOrgId(), officeViewUpdate.getName(), officeViewUpdate.getAddress(),
                 officeViewUpdate.getPhone(), officeViewUpdate.getIsActive()));
     }
 }

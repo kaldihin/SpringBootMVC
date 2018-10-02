@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.organization;
 
+import com.example.demo.Application;
 import com.example.demo.models.Organization;
 import com.example.demo.views.OrganizationViewUpdate;
 import junit.framework.Assert;
@@ -13,19 +14,26 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.example.demo.serviceinterfaces.OrganizationService;
 import com.example.demo.views.OrganizationView;
 import com.example.demo.views.OrganizationViewList;
 import com.example.demo.views.OrganizationViewSave;
 import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,classes = {Application.class})
+@SpringBootTest(classes = {Application.class})
+@WebAppConfiguration(value = "src/main/resources")
+@Transactional
+@DirtiesContext
 public class OrganizationTest {
 
     @Autowired

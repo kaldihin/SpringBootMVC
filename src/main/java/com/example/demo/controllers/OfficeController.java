@@ -33,7 +33,7 @@ public class OfficeController {
 
     @GetMapping("/office/list/{orgId}")
     @ResponseBody
-    public Map<String, Object> list(@PathVariable Integer orgId) {
+    public Map<String, Object> list(@PathVariable("orgId") Integer orgId) {
         Map<String, Object> map = new HashMap<>();
             map.put("Data",officeService.list(orgId));
         return map;

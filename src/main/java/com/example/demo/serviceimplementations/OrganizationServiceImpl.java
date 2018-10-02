@@ -67,11 +67,13 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public OrganizationView getById(Integer id) {
         return new OrganizationView(dao.getById(id));
     }
 
     @Override
+    @Transactional
     public void update(OrganizationViewUpdate viewUpdate) {
         dao.update(new Organization(viewUpdate.getName(),
                 viewUpdate.getFullName(), viewUpdate.getInn(), viewUpdate.getVersion(), viewUpdate.getKpp(),
@@ -79,6 +81,7 @@ public class OrganizationServiceImpl implements OrganizationService {
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
         dao.delete(id);
     }

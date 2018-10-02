@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS organization (
 CREATE TABLE IF NOT EXISTS office (
     office_id          INTEGER  PRIMARY KEY AUTO_INCREMENT,
     office_org_id      INTEGER ,
+    o_id INTEGER ,
     version            INTEGER NOT NULL ,
     office_name        VARCHAR(50) ,
     office_address     VARCHAR(70) ,
@@ -61,6 +62,9 @@ CREATE TABLE IF NOT EXISTS user (
     user_doc_date    DATE ,
     user_citizenship_name VARCHAR(50) ,
     user_citizenship_code INTEGER ,
+    country_code INTEGER ,
+    code INTEGER ,
+    of_id INTEGER ,
     user_phone       VARCHAR(20) ,
     user_is_identified    BOOLEAN,
     FOREIGN KEY (user_office_id) REFERENCES office(office_id),

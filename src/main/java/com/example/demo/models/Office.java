@@ -15,8 +15,6 @@ public class Office {
     @Column(name = "office_id", updatable = false)
     private Integer ofId;
 
-
-
     /**
      * Служебное поле hibernate
      */
@@ -58,9 +56,10 @@ public class Office {
 
     }
 
-    public Office(Integer ofId, Integer orgId, String name,
+    public Office(Integer ofId, Integer version, Integer orgId, String name,
                   String address, String phone, Boolean isActive) {
         this.ofId = ofId;
+        this.version = version;
         this.orgId = orgId;
         this.name = name;
         this.address = address;
