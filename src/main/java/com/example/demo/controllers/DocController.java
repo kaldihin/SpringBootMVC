@@ -26,8 +26,7 @@ public class DocController {
     @ResponseBody
     public Map<String, Object> getDocs() {
         Map<String, Object> map = new HashMap<>();
-        List<DocView> list = docService.docs();
-        map.put("data",list);
+        map.put("data", docService.docs());
         return map;
     }
 

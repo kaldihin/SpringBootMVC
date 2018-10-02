@@ -1,5 +1,6 @@
 package com.example.demo;
 
+import com.example.demo.daointerfaces.DocDao;
 import com.example.demo.serviceinterfaces.DocService;
 import com.example.demo.serviceinterfaces.OfficeService;
 import com.example.demo.views.DocView;
@@ -36,6 +37,9 @@ public class DocTest {
     @Autowired
     DocService officeService;
 
+    @Autowired
+    DocDao docDao;
+
     private final List<Integer> docId = new ArrayList<>();
 
     @Before
@@ -49,15 +53,17 @@ public class DocTest {
         docView.setVersion(0);
         docView.setCode(643);
 
-        String s = restTemplate.postForObject("/docs", docView, String.class);
-        String result = new JSONObject(s).getString("result");
-        Assert.assertEquals("success", result);
+//
+//        String s = restTemplate.postForObject("/docs", docView, String.class);
+//        String result = new JSONObject(s).getString("result");
+//        Assert.assertEquals("success", result);
     }
 
     @Test
     public void testDocList() throws JSONException { // получить офис по ид
 
         JSONObject doc = new JSONObject(restTemplate.getForObject("/docs", DocView.class, HashMap.class).toString());
+        System.out.println(doc);
         Assert.assertEquals(3, doc.length());
     }
 //
