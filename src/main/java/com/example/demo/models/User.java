@@ -171,10 +171,8 @@ public class User {
         return docs;
     }
 
-
-
     @ManyToOne
-    @JoinTable(name="countryCode")
+    @JoinColumn(name="countryCode")
     private Country countries;
 
     public Country getCountries() {

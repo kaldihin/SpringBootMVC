@@ -16,7 +16,7 @@ import java.util.List;
 public class DocDaoImpl implements DocDao {
 
     private final EntityManager em;
-    private String queryString = "SELECT (doc_name, doc_code) FROM Docs";
+    private String queryString = "SELECT d FROM Doc d";
 
     @Autowired
     public DocDaoImpl(EntityManager em) {

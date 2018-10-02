@@ -1,9 +1,7 @@
 package com.example.demo.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.demo.serviceinterfaces.CountryService;
 
 import java.util.HashMap;
@@ -22,7 +20,8 @@ public class CountryController {
         this.countryService = countryService;
     }
 
-    @PostMapping(value = "/countries")
+    @GetMapping(value = "/countries")
+    @ResponseBody
     public Map<String, Object> countries() {
         Map<String, Object> map = new HashMap<>();
             map.put("data",countryService.countries());

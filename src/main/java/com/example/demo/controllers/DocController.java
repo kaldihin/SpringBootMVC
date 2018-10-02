@@ -2,9 +2,7 @@ package com.example.demo.controllers;
 
 import com.example.demo.views.DocView;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.example.demo.serviceinterfaces.DocService;
 
 import java.util.HashMap;
@@ -24,7 +22,8 @@ public class DocController {
         this.docService = docService;
     }
 
-    @PostMapping("/docs")
+    @GetMapping("/docs")
+    @ResponseBody
     public Map<String, Object> getDocs() {
         Map<String, Object> map = new HashMap<>();
         List<DocView> list = docService.docs();

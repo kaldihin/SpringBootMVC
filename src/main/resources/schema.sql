@@ -29,19 +29,19 @@ CREATE TABLE IF NOT EXISTS office (
 /* Table of Doc */
 
 CREATE TABLE IF NOT EXISTS doc (
---     doc_id          INTEGER PRIMARY KEY AUTO_INCREMENT,
+    doc_id          INTEGER PRIMARY KEY AUTO_INCREMENT,
     doc_name        VARCHAR(50) NOT NULL,
     version         INTEGER NOT NULL,
-    doc_code        INTEGER PRIMARY KEY
+    doc_code        INTEGER UNIQUE
 );
 
 /* Table of Countries */
 
 CREATE TABLE IF NOT EXISTS country (
---     country_id      INTEGER PRIMARY KEY AUTO_INCREMENT,
+    country_id      INTEGER PRIMARY KEY AUTO_INCREMENT,
     country_name    VARCHAR(50) NOT NULL,
     version         INTEGER NOT NULL,
-    country_code    INTEGER PRIMARY KEY
+    country_code    INTEGER UNIQUE
 );
 
 /* Table of Users */
@@ -72,20 +72,20 @@ CREATE TABLE IF NOT EXISTS user (
 
 /* Organization <-> Office */
 
-CREATE INDEX IX_office_organization_Id ON office (office_org_id, office_name, office_address, office_phone, office_is_active) ;
+-- CREATE INDEX IX_office_organization_Id ON office (office_org_id, office_name, office_address, office_phone, office_is_active) ;
 
 /* Office <-> User */
 
-CREATE INDEX IX_user_office_Id ON user (user_office_id, version, user_firstname, user_secondname, user_middlename, user_lastname,
-user_position, user_doc_code, user_doc_name, user_doc_number, user_doc_date, user_citizenship_name, user_citizenship_code, user_phone, user_is_identified) ;
+-- CREATE INDEX IX_user_office_Id ON user (user_office_id, version, user_firstname, user_secondname, user_middlename, user_lastname,
+-- user_position, user_doc_code, user_doc_name, user_doc_number, user_doc_date, user_citizenship_name, user_citizenship_code, user_phone, user_is_identified) ;
 
 /* User -> Doc */
 
-CREATE INDEX IX_user_doc ON doc (doc_code);
+-- CREATE INDEX IX_user_doc ON doc (doc_code);
 
 /* User -> Country */
 
-CREATE INDEX IX_user_country ON country (country_code);
+-- CREATE INDEX IX_user_country ON country (country_code);
 
 
 -- /* Organization <-> Office */
