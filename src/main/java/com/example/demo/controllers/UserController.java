@@ -46,8 +46,10 @@ public class UserController {
 
     @GetMapping("/user/{id}")
     @ResponseBody
-    public UserView user(@PathVariable("id") Integer id) {
-        return userService.getUser(id);
+    public Map<String, Object> user(@PathVariable("id") Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", userService.getUser(id));
+        return map;
     }
 
 //    update post
