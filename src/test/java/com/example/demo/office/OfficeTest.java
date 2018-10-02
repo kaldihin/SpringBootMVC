@@ -38,6 +38,7 @@ public class OfficeTest {
     public void testSaveOffice() throws JSONException { // добавить офис
         OfficeViewSave office = new OfficeViewSave();
         office.setIsActive(true);
+        office.setVersion(0);
         office.setPhone("phone");
         office.setName("testName");
         office.setAddress("address");
@@ -49,11 +50,12 @@ public class OfficeTest {
 
     @Test
     public void testOfficeId() { // получить офис по ид
-//        Integer id = officeId.get(0);
+        Integer id = 1;
 //        Map<String, String> params = new HashMap<>();
 //        params.put("id", id.toString());
 //
-//        OfficeView office = restTemplate.getForObject("/office/{id}", OfficeView.class, params);
+        OfficeView office = restTemplate.getForObject("/office/{id}", OfficeView.class, id);
+        System.out.println(office);
 //        Assert.assertEquals(id, office.getId());
     }
 
