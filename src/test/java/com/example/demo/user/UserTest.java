@@ -1,5 +1,6 @@
-package com.example.demo;
+package com.example.demo.user;
 
+import com.example.demo.Application;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.After;

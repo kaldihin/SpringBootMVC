@@ -1,12 +1,6 @@
-package com.example.demo;
+package com.example.demo.office;
 
-import com.example.demo.daointerfaces.DocDao;
-import com.example.demo.serviceinterfaces.DocService;
-import com.example.demo.serviceinterfaces.OfficeService;
-import com.example.demo.views.DocView;
-import com.example.demo.views.OfficeView;
-import com.example.demo.views.OfficeViewSave;
-import com.example.demo.views.OfficeViewUpdate;
+import com.example.demo.Application;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.After;
@@ -19,6 +13,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
+import com.example.demo.serviceinterfaces.OfficeService;
+import com.example.demo.views.OfficeView;
+import com.example.demo.views.OfficeViewSave;
+import com.example.demo.views.OfficeViewUpdate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -28,47 +26,39 @@ import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {Application.class})
-@DirtiesContext
-public class DocTest {
+public class OfficeTest {
 
     @Autowired
     TestRestTemplate restTemplate;
 
     @Autowired
-    DocService officeService;
+    OfficeService officeService;
 
-    @Autowired
-    DocDao docDao;
+    @Test
+    public void testSaveOffice() throws JSONException { // добавить офис
+        OfficeViewSave office = new OfficeViewSave();
+        office.setIsActive(true);
+        office.setPhone("phone");
+        office.setName("testName");
+        office.setAddress("address");
 
-    private final List<Integer> docId = new ArrayList<>();
-
-    @Before
-    public void testBefore() {
+        HashMap map = restTemplate.postForObject("/office/save", office, HashMap.class);
+        System.out.println(map.toString());
+//        Assert.assertEquals("success");
     }
 
     @Test
-    public void testSaveDoc() throws JSONException { // добавить офис
-        DocView docView = new DocView();
-        docView.setName("testName");
-        docView.setVersion(0);
-        docView.setCode(643);
-
+    public void testOfficeId() { // получить офис по ид
+//        Integer id = officeId.get(0);
+//        Map<String, String> params = new HashMap<>();
+//        params.put("id", id.toString());
 //
-//        String s = restTemplate.postForObject("/docs", docView, String.class);
-//        String result = new JSONObject(s).getString("result");
-//        Assert.assertEquals("success", result);
+//        OfficeView office = restTemplate.getForObject("/office/{id}", OfficeView.class, params);
+//        Assert.assertEquals(id, office.getId());
     }
 
     @Test
-    public void testDocList() throws JSONException { // получить офис по ид
-
-        JSONObject doc = new JSONObject(restTemplate.getForObject("/docs", DocView.class, HashMap.class).toString());
-        System.out.println(doc);
-        Assert.assertEquals(3, doc.length());
-    }
-//
-//    @Test
-//    public void testUpdateDoc() throws JSONException { // обновить офис
+    public void testUpdateOffice() throws JSONException { // обновить офис
 //        OfficeViewUpdate office = new OfficeViewUpdate();
 //        office.setId(officeId.get(0));
 //        office.setIsActive(true);
@@ -79,8 +69,8 @@ public class DocTest {
 //        String s = restTemplate.postForObject("/office/update", office, String.class);
 //        String result = new JSONObject(s).getString("result");
 //        Assert.assertEquals("success", result);
-//
-//    }
+
+    }
 //
 //    @Test
 //    public void testOrgOffice() throws JSONException { // Все офисы данной организации
