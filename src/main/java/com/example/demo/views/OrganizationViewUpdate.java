@@ -47,13 +47,6 @@ public class OrganizationViewUpdate {
         this.isActive = organization.getIsActive();
     }
 
-    @Override
-    public String toString() {
-        return "{organization_id:" + id + ";organization_name:" + name + ";organization_fullname:" + fullName +
-                ";organization_inn:" + inn + ";organization_kpp:" + kpp + ";organization_address:" + address +
-                ";organization_phone:" + phone + ";organization_is_active:" + isActive + "}";
-    }
-
     @NotNull
     public Integer getId() {
         return id;
@@ -72,10 +65,6 @@ public class OrganizationViewUpdate {
     @NotNull(message = "version обязательный параметр")
     public Integer getVersion() {
         return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
     }
 
     @NotNull
@@ -113,6 +102,10 @@ public class OrganizationViewUpdate {
         this.fullName = fullName;
     }
 
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
     public void setInn(@NotNull Integer inn) {
         this.inn = inn;
     }
@@ -131,5 +124,12 @@ public class OrganizationViewUpdate {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    @Override
+    public String toString() {
+        return "{organization_id:" + id + ";organization_name:" + name + ";organization_fullname:" + fullName +
+                ";organization_inn:" + inn + ";organization_kpp:" + kpp + ";organization_address:" + address +
+                ";organization_phone:" + phone + ";organization_is_active:" + isActive + "}";
     }
 }

@@ -16,7 +16,6 @@ import java.util.List;
 public class DocDaoImpl implements DocDao {
 
     private final EntityManager em;
-    private String queryString = "SELECT d FROM Doc d";
 
     @Autowired
     public DocDaoImpl(EntityManager em) {
@@ -28,7 +27,7 @@ public class DocDaoImpl implements DocDao {
      */
     @Override
     public List<Doc> docs() {
-        TypedQuery<Doc> query = em.createQuery(queryString, Doc.class);
+        TypedQuery<Doc> query = em.createQuery("SELECT d FROM Doc d", Doc.class);
         return query.getResultList();
     }
 

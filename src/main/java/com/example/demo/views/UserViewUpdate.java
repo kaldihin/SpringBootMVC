@@ -15,15 +15,6 @@ public class UserViewUpdate {
 
     private Integer officeId;
 
-    @NotNull
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
-    }
-
     @NotNull(message = "version обязательный параметр")
     private Integer version;
 
@@ -76,17 +67,6 @@ public class UserViewUpdate {
         this.isIdentified = user.getIsIdentified();
     }
 
-    @Override
-    public String toString() {
-        return "{user_id:" + id + ";user_office_id:" + officeId + ";user_firstname:" +
-                firstName + ";user_secondname:" + secondName + ";user_middlename:" +
-                middleName + ";user_lastname:" + lastName + ";user_position:" +
-                position + ";user_doc_code:" + docCode + ";user_doc_name:" + docName +
-                ";user_doc_number:" + docNumber + ";user_doc_date:" + docDate +
-                ";user_citizenship_name:" + citizenshipName + ";user_citizenship_code:" +
-                citizenshipCode + ";user_phone:" + phone + ";user_is_identified:" + isIdentified + "}";
-    }
-
     @NotNull
     public Integer getId() {
         return id;
@@ -94,6 +74,11 @@ public class UserViewUpdate {
 
     public Integer getOfficeId() {
         return officeId;
+    }
+
+    @NotNull
+    public Integer getVersion() {
+        return version;
     }
 
     @NotNull
@@ -158,6 +143,10 @@ public class UserViewUpdate {
         this.officeId = officeId;
     }
 
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
     public void setFirstName(@NotNull String firstName) {
         this.firstName = firstName;
     }
@@ -210,4 +199,14 @@ public class UserViewUpdate {
         isIdentified = identified;
     }
 
+    @Override
+    public String toString() {
+        return "{user_id:" + id + ";user_office_id:" + officeId + ";user_firstname:" +
+                firstName + ";user_secondname:" + secondName + ";user_middlename:" +
+                middleName + ";user_lastname:" + lastName + ";user_position:" +
+                position + ";user_doc_code:" + docCode + ";user_doc_name:" + docName +
+                ";user_doc_number:" + docNumber + ";user_doc_date:" + docDate +
+                ";user_citizenship_name:" + citizenshipName + ";user_citizenship_code:" +
+                citizenshipCode + ";user_phone:" + phone + ";user_is_identified:" + isIdentified + "}";
+    }
 }

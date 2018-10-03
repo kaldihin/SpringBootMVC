@@ -16,7 +16,6 @@ import java.util.List;
 public class CountryDaoImpl implements CountryDao {
 
     private final EntityManager em;
-    private String queryString = "SELECT p FROM Country p";
 
     @Autowired
     public CountryDaoImpl(EntityManager em) {
@@ -28,7 +27,7 @@ public class CountryDaoImpl implements CountryDao {
      */
     @Override
     public List<Country> countries() {
-        TypedQuery<Country> query = em.createQuery(queryString, Country.class);
+        TypedQuery<Country> query = em.createQuery("SELECT p FROM Country p", Country.class);
         return query.getResultList();
     }
 

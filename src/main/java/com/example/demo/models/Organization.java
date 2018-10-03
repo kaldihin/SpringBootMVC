@@ -15,14 +15,6 @@ public class Organization {
     @Column(name = "organization_id")
     private Integer oId;
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
     /**
      * Служебное поле hibernate
      */
@@ -108,8 +100,16 @@ public class Organization {
         return this.offices;
     }
 
+    public void setOffices(Set<Office> offices) {
+        this.offices = offices;
+    }
+
     public Integer getoId() {
         return oId;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public String getName() {
@@ -144,6 +144,10 @@ public class Organization {
         this.oId = oId;
     }
 
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -172,7 +176,5 @@ public class Organization {
         this.isActive = isActive;
     }
 
-    public void setOffices(Set<Office> offices) {
-        this.offices = offices;
-    }
+
 }

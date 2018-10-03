@@ -12,19 +12,10 @@ public class CountryView {
     @NotNull(message = "name обязательный параметр")
     private String name;
 
-    private Integer code;
-
-    @NotNull
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
-    }
-
     @NotNull(message = "version обязательный параметр")
     private Integer version;
+
+    private Integer code;
 
     public CountryView() {}
 
@@ -39,12 +30,21 @@ public class CountryView {
         return this.name;
     }
 
+    @NotNull
+    public Integer getVersion() {
+        return version;
+    }
+
     public Integer getCode() {
         return this.code;
     }
 
     public void setName(@NotNull String name) {
         this.name = name;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
     }
 
     public void setCode(Integer code) {

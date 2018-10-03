@@ -11,7 +11,7 @@ import java.util.Set;
 public class Office {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "office_id", updatable = false)
     private Integer ofId;
 
@@ -67,8 +67,6 @@ public class Office {
         this.isActive = isActive;
     }
 
-
-
     @ManyToOne
     @JoinColumn(name="oId")
     private Organization organizations;
@@ -80,7 +78,9 @@ public class Office {
         return organizations;
     }
 
-
+    public void setOrganizations(Organization organizations) {
+        this.organizations = organizations;
+    }
 
     @OneToMany(mappedBy = "officeId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users;
@@ -89,16 +89,16 @@ public class Office {
         return this.users;
     }
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
     public Integer getOfId() {
         return ofId;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public Integer getOrgId() {
@@ -125,6 +125,10 @@ public class Office {
         this.ofId = ofId;
     }
 
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public void setOrgId(Integer orgId) {
         this.orgId = orgId;
     }
@@ -145,11 +149,4 @@ public class Office {
         this.isActive = isActive;
     }
 
-    public void setOrganizations(Organization organizations) {
-        this.organizations = organizations;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
 }

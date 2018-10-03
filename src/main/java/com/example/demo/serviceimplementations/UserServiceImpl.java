@@ -35,19 +35,6 @@ public class UserServiceImpl implements UserService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
-    public void save(UserViewSave userViewSave) {
-        User user = new User(userViewSave.getId(), userViewSave.getOfficeId(), userViewSave.getVersion(), userViewSave.getFirstName(), userViewSave.getSecondName(),
-                userViewSave.getMiddleName(), userViewSave.getLastName(), userViewSave.getPosition(), userViewSave.getDocCode(), userViewSave.getDocName(),
-                userViewSave.getDocNumber(), userViewSave.getDocDate(), userViewSave.getCitizenshipName(), userViewSave.getCitizenshipCode(),
-                userViewSave.getPhone(), userViewSave.getIsIdentified());
-        dao.save(user);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     @Transactional(readOnly = true)
     public List<UserViewList> list() {
         List<User> all = dao.list();
@@ -55,6 +42,42 @@ public class UserServiceImpl implements UserService {
         return all.stream()
                 .map(mapUser())
                 .collect(Collectors.toList());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional(readOnly = true)
+    public UserView getUser(Integer id) {
+        User userById = dao.getUser(id);
+        return new UserView(userById);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void update(UserViewUpdate userViewUpdate) {
+        User userUpdate = new User(userViewUpdate.getId(), userViewUpdate.getOfficeId(), userViewUpdate.getVersion(), userViewUpdate.getFirstName(), userViewUpdate.getSecondName(),
+                userViewUpdate.getMiddleName(), userViewUpdate.getLastName(), userViewUpdate.getPosition(), userViewUpdate.getDocCode(), userViewUpdate.getDocName(),
+                userViewUpdate.getDocNumber(), userViewUpdate.getDocDate(), userViewUpdate.getCitizenshipName(), userViewUpdate.getCitizenshipCode(),
+                userViewUpdate.getPhone(), userViewUpdate.getIsIdentified());
+        dao.update(userUpdate);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void save(UserViewSave userViewSave) {
+        User user = new User(userViewSave.getId(), userViewSave.getOfficeId(), userViewSave.getVersion(), userViewSave.getFirstName(), userViewSave.getSecondName(),
+                userViewSave.getMiddleName(), userViewSave.getLastName(), userViewSave.getPosition(), userViewSave.getDocCode(), userViewSave.getDocName(),
+                userViewSave.getDocNumber(), userViewSave.getDocDate(), userViewSave.getCitizenshipName(), userViewSave.getCitizenshipCode(),
+                userViewSave.getPhone(), userViewSave.getIsIdentified());
+        dao.save(user);
     }
 
     private Function<User, UserViewList> mapUser() {
@@ -67,26 +90,10 @@ public class UserServiceImpl implements UserService {
         };
     }
 
-    @Override
-    @Transactional
-    public void delete(Integer id) {
-        dao.delete(id);
-    }
+//    @Override
+//    @Transactional
+//    public void delete(Integer id) {
+//        dao.delete(id);
+//    }
 
-    @Override
-    @Transactional
-    public void update(UserViewUpdate userViewUpdate) {
-        User userUpdate = new User(userViewUpdate.getId(), userViewUpdate.getOfficeId(), userViewUpdate.getVersion(), userViewUpdate.getFirstName(), userViewUpdate.getSecondName(),
-                userViewUpdate.getMiddleName(), userViewUpdate.getLastName(), userViewUpdate.getPosition(), userViewUpdate.getDocCode(), userViewUpdate.getDocName(),
-                userViewUpdate.getDocNumber(), userViewUpdate.getDocDate(), userViewUpdate.getCitizenshipName(), userViewUpdate.getCitizenshipCode(),
-                userViewUpdate.getPhone(), userViewUpdate.getIsIdentified());
-        dao.update(userUpdate);
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public UserView getUser(Integer id) {
-        User userById = dao.getUser(id);
-        return new UserView(userById);
-    }
 }

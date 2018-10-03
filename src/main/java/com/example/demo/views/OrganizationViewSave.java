@@ -17,8 +17,6 @@ public class OrganizationViewSave {
     @NotNull(message = "fullName обязательный параметр")
     private String fullName;
 
-
-
     @NotNull(message = "version обязательный параметр")
     private Integer version;
 
@@ -48,13 +46,6 @@ public class OrganizationViewSave {
         this.isActive = organization.getIsActive();
     }
 
-    @Override
-    public String toString() {
-        return ";organization_name:" + name + ";organization_fullname:" + fullName +
-                ";organization_inn:" + inn + ";organization_kpp:" + kpp + ";organization_address:" + address +
-                ";organization_phone:" + phone + ";organization_is_active:" + isActive + "}";
-    }
-
     public Integer getId() {
         return id;
     }
@@ -72,10 +63,6 @@ public class OrganizationViewSave {
     @NotNull(message = "version обязательный параметр")
     public Integer getVersion() {
         return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
     }
 
     @NotNull
@@ -113,6 +100,10 @@ public class OrganizationViewSave {
         this.fullName = fullName;
     }
 
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
     public void setInn(@NotNull Integer inn) {
         this.inn = inn;
     }
@@ -131,5 +122,12 @@ public class OrganizationViewSave {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    @Override
+    public String toString() {
+        return ";organization_name:" + name + ";organization_fullname:" + fullName +
+                ";organization_inn:" + inn + ";organization_kpp:" + kpp + ";organization_address:" + address +
+                ";organization_phone:" + phone + ";organization_is_active:" + isActive + "}";
     }
 }

@@ -35,11 +35,11 @@ public interface UserDao {
      * @param user
      */
     void save(User user);
-
-    /**
-     * Удалить User по id
-     *
-     * @param id
-     */
-    void delete(Integer id);
+//
+//    /**
+//     * Удалить User по id
+//     *
+//     * @param id
+//     */
+//    void delete(Integer id);
 }

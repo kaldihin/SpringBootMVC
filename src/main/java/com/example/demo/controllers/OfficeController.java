@@ -1,14 +1,9 @@
 package com.example.demo.controllers;
 
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.serviceinterfaces.OfficeService;
-import com.example.demo.views.OfficeView;
-import com.example.demo.views.OfficeViewList;
 import com.example.demo.views.OfficeViewSave;
 import com.example.demo.views.OfficeViewUpdate;
 
@@ -29,25 +24,21 @@ public class OfficeController {
         this.officeService = officeService;
     }
 
-    //  list{orgId} post
-
     @GetMapping("/office/list/{orgId}")
     @ResponseBody
     public Map<String, Object> list(@PathVariable("orgId") Integer orgId) {
         Map<String, Object> map = new HashMap<>();
-            map.put("Data",officeService.list(orgId));
+            map.put("data",officeService.list(orgId));
         return map;
     }
 
-    //  {id} get
-
     @GetMapping("/office/{id}")
     @ResponseBody
-    public OfficeView byId(@PathVariable("id") Integer id) {
-        return officeService.getById(id);
+    public Map<String, Object> byId(@PathVariable("id") Integer id) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("data", officeService.getById(id));
+        return map;
     }
-
-    //  update post
 
 
     @PostMapping("/office/update")
@@ -61,8 +52,6 @@ public class OfficeController {
         }
         return map;
     }
-
-    //  save post
 
     @PostMapping("/office/save")
     public Map<String, Object> save(@Valid @RequestBody OfficeViewSave officeViewSave, BindingResult result) {

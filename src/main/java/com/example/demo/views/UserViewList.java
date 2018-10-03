@@ -14,15 +14,6 @@ public class UserViewList {
     @NotNull(message = "officeId обязательный параметр")
     private Integer officeId;
 
-    @NotNull
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
-    }
-
     @NotNull(message = "version обязательный параметр")
     private Integer version;
 
@@ -73,13 +64,6 @@ public class UserViewList {
         this.isIdentified = user.getIsIdentified();
     }
 
-    @Override
-    public String toString() {
-        return "{user_id:" + id + ";user_firstname:" +
-                firstName + ";user_secondname:" + secondName + ";user_middlename:" +
-                middleName + ";user_position:" + position;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -87,6 +71,11 @@ public class UserViewList {
     @NotNull
     public Integer getOfficeId() {
         return officeId;
+    }
+
+    @NotNull
+    public Integer getVersion() {
+        return version;
     }
 
     public String getFirstName() {
@@ -149,6 +138,10 @@ public class UserViewList {
         this.officeId = officeId;
     }
 
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -201,5 +194,10 @@ public class UserViewList {
         isIdentified = identified;
     }
 
-
+    @Override
+    public String toString() {
+        return "{user_id:" + id + ";user_firstname:" +
+                firstName + ";user_secondname:" + secondName + ";user_middlename:" +
+                middleName + ";user_position:" + position;
+    }
 }

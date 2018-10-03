@@ -40,11 +40,11 @@ public interface OrganizationService {
      */
     OrganizationView getById(Integer id);
 
-    /**
-     * Удалить организацию по ID
-     *
-     * @param id delete by
-     */
-    void delete(Integer id);
+//    /**
+//     * Удалить организацию по ID
+//     *
+//     * @param id delete by
+//     */
+//    void delete(Integer id);
 
 }

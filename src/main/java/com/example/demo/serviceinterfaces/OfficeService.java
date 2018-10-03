@@ -40,10 +40,10 @@ public interface OfficeService {
      */
     void update(OfficeViewUpdate officeViewUpdate);
 
-    /**
-     * Удалить Office
-     *
-     * @param id delete by
-     */
-    void delete(Integer id);
+//    /**
+//     * Удалить Office
+//     *
+//     * @param id delete by
+//     */
+//    void delete(Integer id);
 }

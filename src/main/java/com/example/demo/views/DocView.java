@@ -12,36 +12,10 @@ public class DocView {
     @NotNull(message = "name обязательный параметр")
     private String name;
 
-    @NotNull
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
-    }
-
     @NotNull(message = "version обязательный параметр")
     private Integer version;
 
     private Integer code;
-
-    @NotNull
-    public String getName() {
-        return name;
-    }
-
-    public void setName(@NotNull String name) {
-        this.name = name;
-    }
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
 
     public DocView() {}
 
@@ -49,6 +23,31 @@ public class DocView {
         this.name = doc.getName();
         this.version = doc.getVersion();
         this.code = doc.getCode();
+    }
+
+    @NotNull
+    public String getName() {
+        return name;
+    }
+    @NotNull
+    public Integer getVersion() {
+        return version;
+    }
+
+    public Integer getCode() {
+        return code;
+    }
+
+    public void setName(@NotNull String name) {
+        this.name = name;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
     @Override

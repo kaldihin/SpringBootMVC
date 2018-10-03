@@ -1,12 +1,10 @@
 package com.example.demo.controllers;
 
-import com.example.demo.views.DocView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.serviceinterfaces.DocService;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

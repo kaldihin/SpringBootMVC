@@ -57,19 +57,19 @@ public class OrganizationTest {
      */
     @Test
     public void testIdOrganization() {
-        int id = 4;
+        int id = 3;
         JSONObject jsonObject = new JSONObject(restTemplate.getForObject("/organization/"+id, HashMap.class));
 
         boolean result = jsonObject.toString().contains("organization_id:" + id);
 
         Assert.assertTrue(result);
 
-//        System.out.println(jsonObject.toString());
+        System.out.println(jsonObject.toString());
 
     }
 
     /**
-     * Обновить поле в таблицу organization по значению Id и проверить возвращаемое значение на наличие строки "success"
+     * Обновить поле в таблице organization по значению Id и проверить возвращаемое значение на наличие строки "success"
      * @throws JSONException
      */
     @Test

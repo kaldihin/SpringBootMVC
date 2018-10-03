@@ -35,22 +35,6 @@ public class OfficeServiceImpl implements OfficeService {
      * {@inheritDoc}
      */
     @Override
-    @Transactional
-    public void save(OfficeViewSave officeViewSave) {
-        dao.save(new Office(officeViewSave.getId(), officeViewSave.getVersion(), officeViewSave.getOrgId(), officeViewSave.getName(), officeViewSave.getAddress(),
-                officeViewSave.getPhone(), officeViewSave.getIsActive()));
-    }
-
-    @Override
-    @Transactional
-    public void delete(Integer id) {
-        dao.delete(id);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     @Transactional(readOnly = true)
     public List<OfficeViewList> list(Integer orgId) {
         List<Office> all = dao.list(orgId);
@@ -58,16 +42,6 @@ public class OfficeServiceImpl implements OfficeService {
         return all.stream()
                 .map(mapOffice())
                 .collect(Collectors.toList());
-    }
-
-    private Function<Office, OfficeViewList> mapOffice() {
-        return office -> {
-            OfficeViewList officeViewList = new OfficeViewList(office);
-
-            log.debug(officeViewList.toString());
-
-            return officeViewList;
-        };
     }
 
     /**
@@ -85,7 +59,34 @@ public class OfficeServiceImpl implements OfficeService {
     @Override
     @Transactional
     public void update(OfficeViewUpdate officeViewUpdate) {
-        dao.update(new Office(officeViewUpdate.getId(), officeViewUpdate.getVersion(), officeViewUpdate.getOrgId(), officeViewUpdate.getName(), officeViewUpdate.getAddress(),
+        dao.update(new Office(officeViewUpdate.getId(), officeViewUpdate.getOrgId(), officeViewUpdate.getVersion(), officeViewUpdate.getName(), officeViewUpdate.getAddress(),
                 officeViewUpdate.getPhone(), officeViewUpdate.getIsActive()));
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void save(OfficeViewSave officeViewSave) {
+        dao.save(new Office(officeViewSave.getId(), officeViewSave.getVersion(), officeViewSave.getOrgId(), officeViewSave.getName(), officeViewSave.getAddress(),
+                officeViewSave.getPhone(), officeViewSave.getIsActive()));
+    }
+
+//    @Override
+//    @Transactional
+//    public void delete(Integer id) {
+//        dao.delete(id);
+//    }
+
+    private Function<Office, OfficeViewList> mapOffice() {
+        return office -> {
+            OfficeViewList officeViewList = new OfficeViewList(office);
+
+            log.debug(officeViewList.toString());
+
+            return officeViewList;
+        };
+    }
+
 }

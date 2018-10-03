@@ -41,11 +41,11 @@ public interface UserService {
      */
     void update(UserViewUpdate userViewUpdate);
 
-    /**
-     * Удалить User по id
-     *
-     * @param id
-     */
-    void delete(Integer id);
+//    /**
+//     * Удалить User по id
+//     *
+//     * @param id
+//     */
+//    void delete(Integer id);
 
 }

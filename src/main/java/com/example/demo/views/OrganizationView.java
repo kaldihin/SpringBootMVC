@@ -12,14 +12,6 @@ public class OrganizationView {
 
     private String fullName;
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
     private Integer version;
 
     private Integer inn;
@@ -46,16 +38,10 @@ public class OrganizationView {
         this.isActive = organization.getIsActive();
     }
 
-    @Override
-    public String toString() {
-        return "{organization_id:" + id + ";organization_name:" + name + ";organization_fullname:" + fullName +
-                ";organization_inn:" + inn + ";organization_kpp:" + kpp + ";organization_address:" + address +
-                ";organization_phone:" + phone + ";organization_is_active:" + isActive + "}";
-    }
-
     public Integer getId() {
         return id;
     }
+
 
     public String getName() {
         return name;
@@ -63,6 +49,10 @@ public class OrganizationView {
 
     public String getFullName() {
         return fullName;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public Integer getInn() {
@@ -97,6 +87,10 @@ public class OrganizationView {
         this.fullName = fullName;
     }
 
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public void setInn(Integer inn) {
         this.inn = inn;
     }
@@ -117,4 +111,10 @@ public class OrganizationView {
         this.isActive = isActive;
     }
 
+    @Override
+    public String toString() {
+        return "{organization_id:" + id + ";organization_name:" + name + ";organization_fullname:" + fullName +
+                ";organization_inn:" + inn + ";organization_kpp:" + kpp + ";organization_address:" + address +
+                ";organization_phone:" + phone + ";organization_is_active:" + isActive + "}";
+    }
 }

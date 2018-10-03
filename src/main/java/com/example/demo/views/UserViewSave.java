@@ -13,19 +13,10 @@ public class UserViewSave {
 
     private Integer officeId;
 
-    @NotNull
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
-    }
-
     @NotNull(message = "version обязательный параметр")
     private Integer version;
 
-    @NotNull(message="firstName обязательный параметр")
+    @NotNull(message = "firstName обязательный параметр")
     private String firstName;
 
     private String secondName;
@@ -34,7 +25,7 @@ public class UserViewSave {
 
     private String lastName;
 
-    @NotNull(message="position обязательный параметр")
+    @NotNull(message = "position обязательный параметр")
     private String position;
 
     private Integer docCode;
@@ -53,7 +44,8 @@ public class UserViewSave {
 
     private Boolean isIdentified;
 
-    public UserViewSave() {}
+    public UserViewSave() {
+    }
 
     public UserViewSave(User user) {
         this.id = user.getId();
@@ -74,16 +66,6 @@ public class UserViewSave {
         this.isIdentified = user.getIsIdentified();
     }
 
-    @Override
-    public String toString() {
-        return "{user_id:" + id + ";user_office_id:" + officeId + ";user_firstname:" +
-                firstName + ";user_secondname:" + secondName + ";user_middlename:" +
-                middleName + ";user_lastname:" + lastName + ";user_position:" +
-                position + ";user_doc_code:" + docCode + ";user_doc_name:" + docName +
-                ";user_doc_number:" + docNumber + ";user_doc_date:" + docDate +
-                ";user_citizenship_name:" + citizenshipName + ";user_citizenship_code:" +
-                citizenshipCode + ";user_phone:" + phone + ";user_is_identified:" + isIdentified + "}";
-    }
 
     public Integer getId() {
         return id;
@@ -91,6 +73,11 @@ public class UserViewSave {
 
     public Integer getOfficeId() {
         return officeId;
+    }
+
+    @NotNull
+    public Integer getVersion() {
+        return version;
     }
 
     @NotNull
@@ -155,6 +142,10 @@ public class UserViewSave {
         this.officeId = officeId;
     }
 
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
     public void setFirstName(@NotNull String firstName) {
         this.firstName = firstName;
     }
@@ -205,6 +196,17 @@ public class UserViewSave {
 
     public void setIdentified(Boolean identified) {
         isIdentified = identified;
+    }
+
+    @Override
+    public String toString() {
+        return "{user_id:" + id + ";user_office_id:" + officeId + ";user_firstname:" +
+                firstName + ";user_secondname:" + secondName + ";user_middlename:" +
+                middleName + ";user_lastname:" + lastName + ";user_position:" +
+                position + ";user_doc_code:" + docCode + ";user_doc_name:" + docName +
+                ";user_doc_number:" + docNumber + ";user_doc_date:" + docDate +
+                ";user_citizenship_name:" + citizenshipName + ";user_citizenship_code:" +
+                citizenshipCode + ";user_phone:" + phone + ";user_is_identified:" + isIdentified + "}";
     }
 
 }

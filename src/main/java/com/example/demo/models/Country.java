@@ -28,13 +28,6 @@ public class Country {
     @Column(name = "version", nullable = false)
     private Integer version;
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     /**
      * Код страны
@@ -59,8 +52,16 @@ public class Country {
         return users;
     }
 
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     public String getCountryName() {
         return countryName;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public Integer getCountryCode() {
@@ -71,12 +72,12 @@ public class Country {
         this.countryName = countryName;
     }
 
-    public void setCountryCode(Integer countryCode) {
-        this.countryCode = countryCode;
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
+    public void setCountryCode(Integer countryCode) {
+        this.countryCode = countryCode;
     }
 
 }

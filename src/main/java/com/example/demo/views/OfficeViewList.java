@@ -36,12 +36,6 @@ public class OfficeViewList {
         this.isActive = office.getIsActive();
     }
 
-    @Override
-    public String toString() {
-        return "{office_id:" + id + ";office_name:" + name +
-                ";office_is_active:" + isActive + "}";
-    }
-
     public Integer getId() {
         return id;
     }
@@ -98,6 +92,12 @@ public class OfficeViewList {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    @Override
+    public String toString() {
+        return "{office_id:" + id + ";office_name:" + name +
+                ";office_is_active:" + isActive + "}";
     }
 
 }

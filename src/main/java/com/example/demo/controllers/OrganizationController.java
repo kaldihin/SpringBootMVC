@@ -24,8 +24,6 @@ public class OrganizationController {
         this.organizationService = organizationService;
     }
 
-    //  list post
-
     @GetMapping("/organization/list")
     @ResponseBody
     public Map<String, Object> list() {
@@ -34,18 +32,12 @@ public class OrganizationController {
             return map;
     }
 
-    //  organization{id} get
-
-
     @GetMapping("/organization/{id}")
     public Map<String, Object> organization(@PathVariable("id") Integer id) {
         Map<String, Object> map = new HashMap<>();
         map.put("data", organizationService.getById(id).toString());
         return map;
     }
-
-    //  update post
-
 
     @PostMapping("/organization/update")
     public Map<String, Object> update (@Valid @RequestBody OrganizationViewUpdate viewUpdate, BindingResult result) {
@@ -58,8 +50,6 @@ public class OrganizationController {
         }
         return map;
     }
-
-    //  save post
 
     @PostMapping("/organization/save")
     public Map<String, Object> save (@Valid @RequestBody OrganizationViewSave viewSave, BindingResult result) {

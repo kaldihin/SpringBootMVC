@@ -13,15 +13,6 @@ public class OfficeViewUpdate {
 
     private Integer orgId;
 
-    @NotNull
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
-    }
-
     @NotNull(message = "version обязательный параметр")
     private Integer version;
 
@@ -47,13 +38,6 @@ public class OfficeViewUpdate {
         this.isActive = office.getIsActive();
     }
 
-    @Override
-    public String toString() {
-        return "{office_id:" + id + ";office_name:" + name + ";office_address:"
-                + address + ";office_phone:" + phone + ";office_is_active:" +
-                isActive + "}";
-    }
-
     @NotNull
     public Integer getId() {
         return id;
@@ -61,6 +45,11 @@ public class OfficeViewUpdate {
 
     public Integer getOrgId() {
         return orgId;
+    }
+
+    @NotNull
+    public Integer getVersion() {
+        return version;
     }
 
     @NotNull
@@ -89,6 +78,10 @@ public class OfficeViewUpdate {
         this.orgId = orgId;
     }
 
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
+    }
+
     public void setName(@NotNull String name) {
         this.name = name;
     }
@@ -105,4 +98,10 @@ public class OfficeViewUpdate {
         this.isActive = isActive;
     }
 
+    @Override
+    public String toString() {
+        return "{office_id:" + id + ";office_name:" + name + ";office_address:"
+                + address + ";office_phone:" + phone + ";office_is_active:" +
+                isActive + "}";
+    }
 }

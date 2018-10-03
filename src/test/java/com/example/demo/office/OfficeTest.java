@@ -1,27 +1,19 @@
 package com.example.demo.office;
 
 import com.example.demo.Application;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.example.demo.serviceinterfaces.OfficeService;
-import com.example.demo.views.OfficeView;
 import com.example.demo.views.OfficeViewSave;
 import com.example.demo.views.OfficeViewUpdate;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {Application.class})
@@ -33,58 +25,81 @@ public class OfficeTest {
     @Autowired
     OfficeService officeService;
 
+    /**
+     * Сохранить офис в таблицу office и проверить возвращаемое значение на наличие строки "success"
+     */
     @Test
-    public void testSaveOffice() throws JSONException { // добавить офис
-        OfficeViewSave office = new OfficeViewSave();
-        office.setName("testName");
-        office.setAddress("address");
-        office.setPhone("phone");
-        office.setVersion(0);
+    public void testSaveOffice() {
+        OfficeViewSave officeViewSave = new OfficeViewSave();
+        officeViewSave.setOrgId(2);
+        officeViewSave.setVersion(0);
+        officeViewSave.setName("testName");
+        officeViewSave.setAddress("address");
+        officeViewSave.setPhone("phone");
+        officeViewSave.setIsActive(true);
 
-        office.setIsActive(true);
+        JSONObject jsonObject = new JSONObject(restTemplate.postForObject("/office/save", officeViewSave, HashMap.class));
 
-        HashMap map = restTemplate.postForObject("/office/save", office, HashMap.class);
-        System.out.println(map.toString());
-//        Assert.assertEquals("success");
+        boolean result = jsonObject.toString().contains("success");
+
+        Assert.assertTrue(result);
+
+//        JSONObject showData = new JSONObject(restTemplate.getForObject("/office/list/"+2, HashMap.class));
+//        System.out.println(showData.toString());
     }
 
+    /**
+     * Получить офис из таблицы office по заданному Id и проверить в результате наличие строки id:Id
+     */
     @Test
-    public void testOfficeId() { // получить офис по ид
+    public void testByIdOffice() {
         Integer id = 1;
-//        Map<String, String> params = new HashMap<>();
-//        params.put("id", id.toString());
-//
-        OfficeView office = restTemplate.getForObject("/office/{id}", OfficeView.class, id);
-        System.out.println(office);
-//        Assert.assertEquals(id, office.getId());
+
+        JSONObject jsonObject = new JSONObject(restTemplate.getForObject("/office/" + id, HashMap.class));
+
+        boolean result = jsonObject.toString().replaceAll("\"", "").contains("id:" + id);
+
+        Assert.assertTrue(result);
+
+//      System.out.println(jsonObject.toString());
     }
 
+    /**
+     * Обновить поле в таблице organization по значению Id и проверить возвращаемое значение на наличие строки "success"
+     */
     @Test
-    public void testUpdateOffice() throws JSONException { // обновить офис
-//        OfficeViewUpdate office = new OfficeViewUpdate();
-//        office.setId(officeId.get(0));
-//        office.setIsActive(true);
-//        office.setPhone("phone");
-//        office.setName("SetName");
-//        office.setAddress("address");
-//
-//        String s = restTemplate.postForObject("/office/update", office, String.class);
-//        String result = new JSONObject(s).getString("result");
-//        Assert.assertEquals("success", result);
+    public void testUpdateOffice() {
+        OfficeViewUpdate officeViewUpdate = new OfficeViewUpdate();
+        officeViewUpdate.setId(2);
+        officeViewUpdate.setVersion(1);
+        officeViewUpdate.setName("SetName");
+        officeViewUpdate.setAddress("address");
+        officeViewUpdate.setPhone("phone");
+        officeViewUpdate.setIsActive(true);
 
+        JSONObject jsonObject = new JSONObject(restTemplate.postForObject("/office/update", officeViewUpdate, HashMap.class));
+
+        boolean result = jsonObject.toString().contains("success");
+
+        Assert.assertTrue(result);
+
+//        System.out.println(jsonObject.toString());
     }
-//
-//    @Test
-//    public void testOrgOffice() throws JSONException { // Все офисы данной организации
-//        OfficeView office = new OfficeView();
-//        office.setName("");
-//
-//        String officeIn = restTemplate.postForObject("/office/list/0", office, String.class);
-//        Assert.assertTrue(new JSONObject(officeIn).getJSONArray("Data").length() >= 2);
-//    }
-//
-//    @After
-//    public void testAfter() {
-//        officeId.forEach(id -> officeService.delete(id));
-//    }
+
+    /**
+     * Получить все поля в таблице office по значению orgId и проверить в результате наличие строки orgId:orgId
+     */
+    @Test
+    public void testListOffice() {
+        Integer id = 1;
+
+        JSONObject jsonObject = new JSONObject(restTemplate.getForObject("/office/list/" + id, HashMap.class));
+
+        boolean result = jsonObject.toString().replaceAll("\"", "").contains("orgId:" + id);
+
+        Assert.assertTrue(result);
+
+//        System.out.println(jsonObject.toString());
+    }
+
 }

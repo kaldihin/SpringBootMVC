@@ -64,10 +64,10 @@ public class OrganizationDaoImpl implements OrganizationDao {
     public void save(Organization organization) {
         em.persist(organization);
     }
-
-    @Override
-    public void delete(Integer id) {
-        Organization organization = em.find(Organization.class, id);
-        em.remove(organization);
-    }
+//
+//    @Override
+//    public void delete(Integer id) {
+//        Organization organization = em.find(Organization.class, id);
+//        em.remove(organization);
+//    }
 }

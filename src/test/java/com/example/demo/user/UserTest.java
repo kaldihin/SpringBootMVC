@@ -1,11 +1,8 @@
 package com.example.demo.user;
 
 import com.example.demo.Application;
-import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.After;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,14 +10,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.example.demo.serviceinterfaces.UserService;
-import com.example.demo.views.UserView;
 import com.example.demo.views.UserViewSave;
 import com.example.demo.views.UserViewUpdate;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.util.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {Application.class})
@@ -32,50 +26,102 @@ public class UserTest {
     @Autowired
     UserService userService;
 
+    /**
+     * Сохранить сотрудника в таблицу user и проверить возвращаемое значение на наличие строки "success"
+     */
     @Test
-    public void testSaveUser() throws JSONException { // добавить user
-        UserViewSave user = new UserViewSave();
-        user.setFirstName("firstName_test");
-        user.setVersion(0);
-        user.setPosition("position_test");
+    public void testSaveUser() {
+        UserViewSave userViewSave = new UserViewSave();
+        userViewSave.setOfficeId(1);
+        userViewSave.setVersion(0);
+        userViewSave.setFirstName("firstName_test");
+        userViewSave.setSecondName("SecondNameTest");
+        userViewSave.setMiddleName("MiddleNameTest");
+        userViewSave.setLastName("LastNameTest");
+        userViewSave.setPosition("position_test");
+        userViewSave.setDocCode(13);
+        userViewSave.setDocName("DocNameTest");
+        userViewSave.setDocNumber(4);
+        userViewSave.setDocDate(Date.valueOf("2017-09-09"));
+        userViewSave.setCitizenshipName("Angola");
+        userViewSave.setCitizenshipCode(659);
+        userViewSave.setPhone("89378679564");
+        userViewSave.setIdentified(false);
 
-        String s = restTemplate.postForObject("/user/save", user, String.class);
-        String result = new JSONObject(s).getString("result");
-        Assert.assertEquals("success", result);
+        JSONObject jsonObject = new JSONObject(restTemplate.postForObject("/user/save", userViewSave, HashMap.class));
+
+        boolean result = jsonObject.toString().contains("success");
+
+        Assert.assertTrue(result);
+
+//        JSONObject showData = new JSONObject(restTemplate.getForObject("/user/list", HashMap.class));
+//        System.out.println(showData.toString());
     }
 
+    /**
+     * Получить сотрудника из таблицы user по заданному Id и проверить в результате наличие строки id:Id
+     */
     @Test
-    public void testUserId() throws JSONException { // получить user по ид
+    public void testUserId() {
         Integer id = 1;
 
-        JSONObject jsonObject = new JSONObject(restTemplate.getForObject("/user/{id}", HashMap.class, id));
-        System.out.println(jsonObject.toString());
-//        Assert.assertEquals(id, user.getId());
+        JSONObject jsonObject = new JSONObject(restTemplate.getForObject("/user/"+ id, HashMap.class));
+
+        boolean result = jsonObject.toString().replaceAll("\"", "").contains("id:" + id);
+
+        Assert.assertTrue(result);
+
+//        System.out.println(jsonObject.toString());
     }
 
-//    @Test
-//    public void testUpdateUser() throws JSONException { // обновить user
-//        UserViewUpdate user = new UserViewUpdate();
-//        user.setFirstName("firstName");
-//        user.setPosition("position");
-//        user.setId(userId.get(0));
-//
-//        String s = restTemplate.postForObject("/user/update", user, String.class);
-//        String result = new JSONObject(s).getString("result");
-//        Assert.assertEquals("success", result);
-//    }
-
+    /**
+     * Обновить поле в таблице user и проверить возвращаемое значение на наличие строки "success"
+     */
     @Test
-    public void testOrgOffice() throws JSONException { // Кто работает в данном офисе
-        UserView userView = new UserView();
-        userView.setId(1);
+    public void testUpdateUser() {
+        UserViewUpdate userViewUpdate = new UserViewUpdate();
+        userViewUpdate.setId(2);
+        userViewUpdate.setOfficeId(2);
+        userViewUpdate.setVersion(1);
+        userViewUpdate.setFirstName("FirstNameTest");
+        userViewUpdate.setSecondName("SecondNameTest");
+        userViewUpdate.setMiddleName("MiddleNameTest");
+        userViewUpdate.setLastName("LastNameTest");
+        userViewUpdate.setPosition("PositionTest");
+        userViewUpdate.setDocCode(21);
+        userViewUpdate.setDocName("DocNameTest");
+        userViewUpdate.setDocNumber(2);
+        userViewUpdate.setDocDate(Date.valueOf("2013-12-12"));
+        userViewUpdate.setCitizenshipName("CitizenshipNameTest");
+        userViewUpdate.setCitizenshipCode(784);
+        userViewUpdate.setPhone("89424657832");
+        userViewUpdate.setIdentified(true);
 
-        String officeIn = restTemplate.postForObject("/user/list", userView, String.class);
-        Assert.assertTrue(new JSONObject(officeIn).getJSONArray("Data").length() >= 2);
+        JSONObject jsonObject = new JSONObject(restTemplate.postForObject("/user/update", userViewUpdate, HashMap.class));
+        System.out.println(jsonObject.toString());
+
+        boolean result = jsonObject.toString().contains("success");
+
+        Assert.assertTrue(result);
+
+//        JSONObject showData = new JSONObject(restTemplate.getForObject("/user/list", HashMap.class));
+//        System.out.println(showData.toString());
     }
 
-//    @After
-//    public void testAfter() {
-//        userId.forEach(id -> userService.delete(id));
-//    }
+    /**
+     * Получить все записи из таблицы user
+     */
+    @Test
+    public void testListUser() {
+
+        JSONObject jsonObject = new JSONObject(restTemplate.getForObject("/user/list", HashMap.class));
+
+        boolean firstField = jsonObject.toString().contains("Федя");
+        boolean secondField = jsonObject.toString().contains("659");
+        boolean thirdField = jsonObject.toString().contains("8573542310");
+
+        Assert.assertTrue(firstField && secondField && thirdField);
+
+//        System.out.println(jsonObject.toString());
+    }
 }

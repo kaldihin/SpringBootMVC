@@ -36,11 +36,11 @@ public interface OfficeDao {
      * @param office save
      */
     void save(Office office);
-
-    /**
-     * Удалить Office по ID
-     *
-     * @param id delete by
-     */
-    void delete(Integer id);
+//
+//    /**
+//     * Удалить Office по ID
+//     *
+//     * @param id delete by
+//     */
+//    void delete(Integer id);
 }

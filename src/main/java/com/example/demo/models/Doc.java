@@ -25,14 +25,6 @@ public class Doc {
     @Column(name = "version", nullable = false)
     private Integer version;
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
-
     /**
      * Код документа
      */
@@ -48,8 +40,6 @@ public class Doc {
         this.code = code;
     }
 
-
-
     @OneToMany(mappedBy = "docCode", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<User> users;
 
@@ -57,8 +47,16 @@ public class Doc {
         return this.users;
     }
 
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
+
     public String getName() {
         return name;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public Integer getCode() {
@@ -69,11 +67,13 @@ public class Doc {
         this.name = name;
     }
 
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public void setCode(Integer code) {
         this.code = code;
     }
 
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
+
 }

@@ -1,16 +1,12 @@
 package com.example.demo.daoimplementations;
 
-import com.example.demo.models.Organization;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import com.example.demo.daointerfaces.OfficeDao;
 import com.example.demo.models.Office;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -45,7 +41,14 @@ public class OfficeDaoImpl implements OfficeDao {
 
     @Override
     public void update(Office office) {
-        em.merge(office);
+        Office target = em.find(Office.class, office.getOfId());
+        target.setOrgId(office.getOrgId());
+        target.setVersion(office.getVersion());
+        target.setName(office.getName());
+        target.setAddress(office.getAddress());
+        target.setPhone(office.getPhone());
+        target.setIsActive(office.getIsActive());
+        em.merge(target);
     }
 
     /**
@@ -56,9 +59,9 @@ public class OfficeDaoImpl implements OfficeDao {
         em.persist(office);
     }
 
-    @Override
-    public void delete(Integer id) {
-        Office office = em.find(Office.class, id);
-        em.remove(office);
-    }
+//    @Override
+//    public void delete(Integer id) {
+//        Office office = em.find(Office.class, id);
+//        em.remove(office);
+//    }
 }

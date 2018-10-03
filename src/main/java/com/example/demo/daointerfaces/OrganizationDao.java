@@ -36,11 +36,11 @@ public interface OrganizationDao {
      * @param organization save
      */
     void save(Organization organization);
-
-    /**
-     * Удалить Organization по ID
-     *
-     * @param id delete
-     */
-    void delete(Integer id);
+//
+//    /**
+//     * Удалить Organization по ID
+//     *
+//     * @param id delete
+//     */
+//    void delete(Integer id);
 }

@@ -15,7 +15,7 @@ public class User {
      * Идентификатор сотрудника
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer uId;
 
@@ -24,14 +24,6 @@ public class User {
      */
     @Column(name = "user_office_id")
     private Integer officeId;
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     /**
      * Служебное поле hibernate
@@ -118,9 +110,7 @@ public class User {
     @Column(name = "user_is_identified")
     private Boolean isIdentified;
 
-    public User() {
-
-    }
+    public User() {}
 
     public User(Integer uId, Integer officeId, Integer version, String firstName, String secondName,
                 String middleName, String lastName, String position, Integer docCode,
@@ -145,8 +135,6 @@ public class User {
         this.isIdentified = isIdentified;
     }
 
-
-
     @ManyToOne
     @JoinColumn(name="ofId")
     private Office offices;
@@ -158,7 +146,9 @@ public class User {
         return offices;
     }
 
-
+    public void setOffices(Office offices) {
+        this.offices = offices;
+    }
 
     @ManyToOne
     @JoinColumn(name="code")
@@ -169,6 +159,10 @@ public class User {
             docs = new Doc();
         }
         return docs;
+    }
+
+    public void setDocs(Doc docs) {
+        this.docs = docs;
     }
 
     @ManyToOne
@@ -182,12 +176,20 @@ public class User {
         return countries;
     }
 
+    public void setCountries(Country countries) {
+        this.countries = countries;
+    }
+
     public Integer getId() {
         return uId;
     }
 
     public Integer getOfficeId() {
         return officeId;
+    }
+
+    public Integer getVersion() {
+        return version;
     }
 
     public String getFirstName() {
@@ -250,6 +252,10 @@ public class User {
         this.officeId = officeId;
     }
 
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
@@ -300,18 +306,6 @@ public class User {
 
     public void setIdentified(Boolean identified) {
         isIdentified = identified;
-    }
-
-    public void setOffices(Office offices) {
-        this.offices = offices;
-    }
-
-    public void setDocs(Doc docs) {
-        this.docs = docs;
-    }
-
-    public void setCountries(Country countries) {
-        this.countries = countries;
     }
 
 }
