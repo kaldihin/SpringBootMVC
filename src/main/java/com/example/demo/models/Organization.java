@@ -11,7 +11,7 @@ import java.util.Set;
 public class Organization {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "organization_id")
     private Integer oId;
 
@@ -76,7 +76,7 @@ public class Organization {
 
     }
 
-    public Organization(String name, String fullName, Integer inn, Integer version,
+    public Organization(String name, String fullName, Integer version, Integer inn,
                         Integer kpp, String address, String phone, Boolean isActive) {
         this.name = name;
         this.fullName = fullName;
@@ -88,7 +88,18 @@ public class Organization {
         this.isActive = isActive;
     }
 
-
+    public Organization(Integer id, String name, String fullName, Integer version, Integer inn,
+                        Integer kpp, String address, String phone, Boolean isActive) {
+        this.oId = id;
+        this.name = name;
+        this.fullName = fullName;
+        this.version = version;
+        this.inn = inn;
+        this.kpp = kpp;
+        this.address = address;
+        this.phone = phone;
+        this.isActive = isActive;
+    }
 
     @OneToMany(mappedBy = "orgId", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Office> offices;

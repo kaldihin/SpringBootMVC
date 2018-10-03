@@ -75,8 +75,8 @@ public class OrganizationServiceImpl implements OrganizationService {
     @Override
     @Transactional
     public void update(OrganizationViewUpdate viewUpdate) {
-        dao.update(new Organization(viewUpdate.getName(),
-                viewUpdate.getFullName(), viewUpdate.getInn(), viewUpdate.getVersion(), viewUpdate.getKpp(),
+        dao.update(new Organization(viewUpdate.getId(), viewUpdate.getName(),
+                viewUpdate.getFullName(), viewUpdate.getVersion(), viewUpdate.getInn(), viewUpdate.getKpp(),
                 viewUpdate.getAddress(), viewUpdate.getPhone(), viewUpdate.getIsActive()));
     }
 

@@ -18,15 +18,6 @@ public class OrganizationViewUpdate {
     private String fullName;
 
     @NotNull(message = "version обязательный параметр")
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
-    }
-
-    @NotNull(message = "version обязательный параметр")
     private Integer version;
 
     @NotNull(message = "inn обязательный параметр")
@@ -76,6 +67,15 @@ public class OrganizationViewUpdate {
     @NotNull
     public String getFullName() {
         return fullName;
+    }
+
+    @NotNull(message = "version обязательный параметр")
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
     }
 
     @NotNull

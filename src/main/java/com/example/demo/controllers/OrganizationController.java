@@ -4,15 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import com.example.demo.serviceinterfaces.OrganizationService;
-import com.example.demo.views.OrganizationView;
-import com.example.demo.views.OrganizationViewList;
 import com.example.demo.views.OrganizationViewSave;
 import com.example.demo.views.OrganizationViewUpdate;
 
 import javax.validation.Valid;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -34,8 +30,7 @@ public class OrganizationController {
     @ResponseBody
     public Map<String, Object> list() {
         Map<String, Object> map = new HashMap<>();
-        List<OrganizationViewList> list = organizationService.list();
-        map.put("data", list);
+        map.put("data", organizationService.list());
             return map;
     }
 

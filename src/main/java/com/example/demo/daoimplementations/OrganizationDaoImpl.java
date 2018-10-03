@@ -44,7 +44,17 @@ public class OrganizationDaoImpl implements OrganizationDao {
      */
     @Override
     public void update(Organization organization) {
-        em.merge(organization);
+        Integer id = organization.getoId();
+        Organization target = em.find(Organization.class, id);
+        target.setName(organization.getName());
+        target.setFullName(organization.getFullName());
+        target.setVersion(organization.getVersion());
+        target.setInn(organization.getInn());
+        target.setKpp(organization.getKpp());
+        target.setAddress(organization.getAddress());
+        target.setPhone(organization.getPhone());
+        target.setIsActive(organization.getIsActive());
+        em.merge(target);
     }
 
     /**

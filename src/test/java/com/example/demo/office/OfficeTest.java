@@ -23,7 +23,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {Application.class})
 public class OfficeTest {
@@ -37,11 +36,12 @@ public class OfficeTest {
     @Test
     public void testSaveOffice() throws JSONException { // добавить офис
         OfficeViewSave office = new OfficeViewSave();
-        office.setIsActive(true);
-        office.setVersion(0);
-        office.setPhone("phone");
         office.setName("testName");
         office.setAddress("address");
+        office.setPhone("phone");
+        office.setVersion(0);
+
+        office.setIsActive(true);
 
         HashMap map = restTemplate.postForObject("/office/save", office, HashMap.class);
         System.out.println(map.toString());

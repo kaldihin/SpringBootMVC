@@ -1,37 +1,20 @@
 package com.example.demo.organization;
 
 import com.example.demo.Application;
-import com.example.demo.models.Organization;
 import com.example.demo.views.OrganizationViewUpdate;
-import junit.framework.Assert;
+import org.junit.Assert;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringBootConfiguration;
-import org.springframework.boot.autoconfigure.ImportAutoConfiguration;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.test.annotation.DirtiesContext;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 import com.example.demo.serviceinterfaces.OrganizationService;
-import com.example.demo.views.OrganizationView;
-import com.example.demo.views.OrganizationViewList;
 import com.example.demo.views.OrganizationViewSave;
-import org.springframework.test.context.web.WebAppConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT, classes = {Application.class})
@@ -43,55 +26,56 @@ public class OrganizationTest {
     @Autowired
     OrganizationService organizationService;
 
-    @Before
-    public void testBefore() {
-//        OrganizationViewSave organizationViewSave = new OrganizationViewSave();
-//        organizationViewSave.setName("testName");
-//        organizationViewSave.setFullName("TestFullName");
-//        organizationViewSave.setVersion(0);
-//        organizationViewSave.setInn(123);
-//        organizationViewSave.setKpp(123);
-//        organizationViewSave.setAddress("TestAddress");
-//        organizationViewSave.setPhone("89278763421");
-//        organizationViewSave.setIsActive(true);
-//
-//        organizationService.save(organizationViewSave);
-//        idList.add(1);
-//
-//        System.out.println(organizationService.list());
-    }
-
+    /**
+     * Сохранить организацию в таблицу organization и проверить возвращаемое значение на наличие строки "success"
+     */
     @Test
-    public void testSaveOrganization() throws JSONException { // добавить организацию
+    public void testSaveOrganization() {
         OrganizationViewSave organizationViewSave = new OrganizationViewSave();
         organizationViewSave.setName("testName");
         organizationViewSave.setFullName("TestFullName");
         organizationViewSave.setVersion(0);
-        organizationViewSave.setInn(123);
-        organizationViewSave.setKpp(123);
+        organizationViewSave.setInn(2636754);
+        organizationViewSave.setKpp(86854223);
         organizationViewSave.setAddress("TestAddress");
         organizationViewSave.setPhone("89278763421");
         organizationViewSave.setIsActive(true);
 
-        String s = restTemplate.postForObject("http://localhost:8888/organization/save", organizationViewSave, String.class);
-        String result = new JSONObject(s).getString("result");
-        Assert.assertEquals("success", result);
+        JSONObject s = new JSONObject(restTemplate.postForObject("/organization/save", organizationViewSave, HashMap.class));
 
-//        OrganizationViewList orgDelete = new OrganizationViewList();
-//        orgDelete.setName(organizationViewSave.getName());
-//        organizationService.list().forEach(filter -> orgId.add(filter.getId()));
+        boolean result = s.toString().contains("success");
+
+        Assert.assertTrue(result);
+
+//        JSONObject showData = new JSONObject(restTemplate.getForObject("/organization/list", HashMap.class));
+//        System.out.println(showData.toString());
+
     }
 
+    /**
+     * Получить организацию из таблицы organization по заданному Id и проверить в результате наличие строки organization_id:Id
+     */
     @Test
-    public void testOrganizationId() { // получить Organization по ид
+    public void testIdOrganization() {
+        int id = 4;
+        JSONObject jsonObject = new JSONObject(restTemplate.getForObject("/organization/"+id, HashMap.class));
 
-//        OrganizationView orgNew = restTemplate.getForObject("/organization/"+id, OrganizationView.class, HashMap.class);
-//        Assert.assertEquals(id, orgNew.getId());
+        boolean result = jsonObject.toString().contains("organization_id:" + id);
+
+        Assert.assertTrue(result);
+
+//        System.out.println(jsonObject.toString());
+
     }
 
+    /**
+     * Обновить поле в таблицу organization по значению Id и проверить возвращаемое значение на наличие строки "success"
+     * @throws JSONException
+     */
     @Test
-    public void testUpdateOrganization() throws JSONException { // обновить Organization
+    public void testUpdateOrganization() throws JSONException {
         OrganizationViewUpdate organizationViewUpdate = new OrganizationViewUpdate();
+        organizationViewUpdate.setId(1);
         organizationViewUpdate.setName("testUpdateName");
         organizationViewUpdate.setFullName("testUpdateFullName");
         organizationViewUpdate.setVersion(1);
@@ -101,22 +85,32 @@ public class OrganizationTest {
         organizationViewUpdate.setPhone("phone");
         organizationViewUpdate.setIsActive(true);
 
-        String s = restTemplate.postForObject("/organization/update", organizationViewUpdate, String.class);
-        String result = new JSONObject(s).getString("result");
-        Assert.assertEquals("success", result);
+        JSONObject jsonObject = new JSONObject(restTemplate.postForObject("/organization/update", organizationViewUpdate, String.class));
+
+        boolean result = jsonObject.toString().contains("success");
+
+        Assert.assertTrue("success", result);
+
+//        JSONObject showData = new JSONObject(restTemplate.getForObject("/organization/list", HashMap.class));
+//        System.out.println(showData.toString());
+
     }
 
+    /**
+     * Получить все записи из таблицы organization
+     */
     @Test
-    public void testListOrganization() throws JSONException {
-        JSONObject s = new JSONObject(restTemplate.getForObject("/organization/list", HashMap.class));
-        System.out.println(s);
-//        Assert.assertEquals(3, s.length());
+    public void testListOrganization() {
 
+        JSONObject jsonObject = new JSONObject(restTemplate.getForObject("/organization/list", HashMap.class));
+
+        boolean firstField = jsonObject.toString().contains("Bad Organization");
+        boolean secondField = jsonObject.toString().contains("164178866");
+        boolean thirdField = jsonObject.toString().contains("Новая организация");
+
+        Assert.assertTrue(firstField && secondField && thirdField);
+
+//        System.out.println(jsonObject.toString());
     }
-
-//    @After
-//    public void testAfter() {
-//        orgId.forEach(id -> organizationService.delete(id));
-//    }
     
 }

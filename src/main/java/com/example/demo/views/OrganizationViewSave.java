@@ -17,14 +17,7 @@ public class OrganizationViewSave {
     @NotNull(message = "fullName обязательный параметр")
     private String fullName;
 
-    @NotNull(message = "version обязательный параметр")
-    public Integer getVersion() {
-        return version;
-    }
 
-    public void setVersion(@NotNull Integer version) {
-        this.version = version;
-    }
 
     @NotNull(message = "version обязательный параметр")
     private Integer version;
@@ -47,6 +40,7 @@ public class OrganizationViewSave {
     public OrganizationViewSave(Organization organization) {
         this.name = organization.getName();
         this.fullName = organization.getFullName();
+        this.version = organization.getVersion();
         this.inn = organization.getInn();
         this.kpp = organization.getKpp();
         this.address = organization.getAddress();
@@ -73,6 +67,15 @@ public class OrganizationViewSave {
     @NotNull
     public String getFullName() {
         return fullName;
+    }
+
+    @NotNull(message = "version обязательный параметр")
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(@NotNull Integer version) {
+        this.version = version;
     }
 
     @NotNull
