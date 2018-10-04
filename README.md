@@ -1,1 +1,1 @@
-# Springboot REST API application for working with H2 database
+# Springboot REST API application builded by MVC pattern, works with H2 database
