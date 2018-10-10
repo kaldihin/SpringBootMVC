@@ -52,18 +52,3 @@ INSERT INTO user (user_office_id, version, user_firstname, user_secondname, user
 INSERT INTO user (user_office_id, version, user_firstname, user_secondname, user_middlename, user_lastname, user_position, user_doc_code,
                    user_doc_name, user_doc_number, user_doc_date, user_citizenship_name, user_citizenship_code, user_phone, user_is_identified) VALUES (2, 0,
                                                                                                                                                          'Игорь', 'Трунов', 'ПолуТрунов', 'Иго', 'Грузчик', 21, 'IT3', 30, '2015-07-29', 'Czech', 784, '8573542310', false);
-
-
-/* Examples
-
-INSERT INTO House (oId, version, address) VALUES (1, 0, 'ул.Цюрупы, 16');
-
-INSERT INTO House (oId, version, address) VALUES (2, 0, 'ул.Лунина, 7');
-
-INSERT INTO Person (oId, version, first_name, age) VALUES (1, 0, 'Пётр', 20);
-
-INSERT INTO Person (oId, version, first_name, age) VALUES (2, 0, 'John', 25);
-
-INSERT INTO Person_House (person_id, house_id) VALUES (1, 1);
-
-INSERT INTO Person_House (person_id, house_id) VALUES (1, 2); */
